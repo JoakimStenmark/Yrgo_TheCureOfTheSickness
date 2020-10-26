@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour{
 
+    GameObject gameController;
+    TunnelController tunnelController;
+
     [SerializeField]
     GameObject player;
 
@@ -16,7 +19,12 @@ public class CameraController : MonoBehaviour{
     public float moveSpeed;
     float lerpStep = 0;
 
+    int pathStep = 0;
+
     void Start() {
+
+        gameController = GameObject.FindGameObjectWithTag (Tags.gameController);
+        tunnelController = gameController.GetComponent<TunnelController>();
 
         player = GameObject.FindGameObjectWithTag (Tags.player);
     }
@@ -27,12 +35,6 @@ public class CameraController : MonoBehaviour{
             
             lerpStep += moveSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (pathFrom, pathGoal, lerpStep);
-        }
-
-        // Input for testing, remove later...
-        if( Input.GetKeyDown(KeyCode.Space) ) {
-
-            SetPathGoal (new Vector3(Random.Range (0, 1000), Random.Range (0, 1000), Random.Range (0, 1000)));
         }
     }
 
