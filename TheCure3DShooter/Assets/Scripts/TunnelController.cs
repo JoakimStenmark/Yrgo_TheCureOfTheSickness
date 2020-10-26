@@ -2,43 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TunnelController : MonoBehaviour
-{
+public class TunnelController : MonoBehaviour {
+
+    public bool tunnelGenerated = false;
+    bool debug = true;
 
     public GameObject tunnelPart;
 
-    GameObject[] tunnelSegments;
-    public Vector3[] navPoint;
+    public GameObject[] tunnelSegments;
 
     public int mapLength = 50;
     public float offset;
     public float zOffset;
 
-    bool debug = true;
+    
 
     void Start() {
 
         tunnelSegments = new GameObject[ mapLength ];
         tunnelSegments[0] = tunnelPart;
 
-        navPoint = new Vector3[ mapLength ];
-
         GenerateMap();
-        GeneratePath();
-    }
-
-    void Update() {
-
-        if( debug ) {
-
-            for( int i = 0; i < navPoint.Length; i++ ) {
-
-                if( i < navPoint.Length - 1 ) {
-
-                    Debug.DrawLine(navPoint[ i ], navPoint[ i + 1 ]);
-                }
-            }
-        }
+        
     }
 
     void GenerateMap() {
@@ -61,13 +46,7 @@ public class TunnelController : MonoBehaviour
 
             lastPosition = newPosition;
         }
-    }
 
-    void GeneratePath() {
-
-        for( int i = 0; i < navPoint.Length; i++ ) {
-
-            navPoint[ i ] = tunnelSegments[ i ].transform.position; 
-        }
+        tunnelGenerated = true;
     }
 }
