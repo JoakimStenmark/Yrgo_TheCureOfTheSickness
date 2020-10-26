@@ -5,13 +5,19 @@ using UnityEngine;
 public class TunnelController : MonoBehaviour
 {
 
+    public GameObject tunnelPart;
+
     public GameObject[] tunnelSegments;
 
     public int mapLength = 50;
     public float offset;
+    public float zOffset;
 
     void Start() {
-        
+
+        tunnelSegments = new GameObject[ mapLength ];
+        tunnelSegments[0] = tunnelPart;
+
         GenerateMap();
     }
 
@@ -31,10 +37,12 @@ public class TunnelController : MonoBehaviour
 
                 Random.Range(lastPosition.x - offset, lastPosition.x + offset),
                 Random.Range(lastPosition.y - offset, lastPosition.y + offset),
-                i
+                i * zOffset
             );
 
-            Instantiate (tunnelSegments[0], newPosition, Quaternion.identity);
+            GameObject obj = Instantiate(tunnelPart, newPosition, Quaternion.identity);
+
+            tunnelSegments[i] = obj;
 
             lastPosition = newPosition;
         }
