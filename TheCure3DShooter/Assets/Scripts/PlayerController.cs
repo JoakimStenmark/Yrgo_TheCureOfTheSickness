@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z + forwardSpeed));
-
+        
         rb.AddForce(movement * directionalSpeed);
     }
 
