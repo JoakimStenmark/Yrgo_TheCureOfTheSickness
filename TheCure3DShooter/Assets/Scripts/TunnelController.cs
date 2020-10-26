@@ -7,7 +7,7 @@ public class TunnelController : MonoBehaviour
 
     public GameObject[] tunnelSegments;
 
-    int mapLength = 50;
+    public int mapLength = 50;
     public float offset;
 
     void Start() {
@@ -35,6 +35,8 @@ public class TunnelController : MonoBehaviour
             );
 
             Instantiate (tunnelSegments[0], newPosition, Quaternion.identity);
+
+            lastPosition = newPosition;
         }
     }
 }
