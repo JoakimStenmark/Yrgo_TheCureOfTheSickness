@@ -4,43 +4,51 @@ using UnityEngine;
 
 public class Navigation : MonoBehaviour {
 
-    public Vector3[] navPoint;
-
-    int mapLength = 500;
-    bool debug = true;
-
     GameSettings gameSettings;
     TunnelController tunnelController;
+
+    public Vector3[] navPoint;
+
+    bool navPointsGenerated = false;
 
     void Start() {
 
         gameSettings = GetComponent<GameSettings>();
         tunnelController = GetComponent<TunnelController>();
 
-        navPoint = new Vector3[ gameSettings.mapLenth ];
-
-        GeneratePath();
+        navPoint = new Vector3[ gameSettings.mapLength ];
     }
 
     void Update() {
 
-        if( gameSettings.debug ) {
+        if( navPointsGenerated == false ) {
 
-            for( int i = 0; i < navPoint.Length; i++ ) {
+            if( tunnelController.tunnelGenerated ) {
 
-                if( i < navPoint.Length - 1 ) {
+                GenerateNavPoints();
+            }
+        } else {
 
-                    Debug.DrawLine(navPoint[ i ], navPoint[ i + 1 ]);
+            if( gameSettings.debug ) {
+
+                for( int i = 0; i < navPoint.Length; i++ ) {
+
+                    if( i < navPoint.Length - 1 ) {
+
+                        Debug.DrawLine(navPoint[ i ], navPoint[ i + 1 ]);
+                    }
                 }
             }
         }
     }
 
-    void GeneratePath() {
+    void GenerateNavPoints() {
 
         for( int i = 0; i < navPoint.Length; i++ ) {
 
             navPoint[ i ] = tunnelController.tunnelSegments[ i ].transform.position;
         }
+
+        navPointsGenerated = true;
     }
 }

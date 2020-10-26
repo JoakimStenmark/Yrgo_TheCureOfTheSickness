@@ -5,6 +5,5 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour {
 
     public bool debug;
-    public int mapLenth = 500;
-
+    public int mapLength = 500;
 }

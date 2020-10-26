@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class TunnelController : MonoBehaviour {
 
+    GameSettings gameSettings;
+
     public bool tunnelGenerated = false;
-    bool debug = true;
 
     public GameObject tunnelPart;
 
     public GameObject[] tunnelSegments;
 
-    public int mapLength = 50;
     public float offset;
     public float zOffset;
 
-    
-
     void Start() {
 
-        tunnelSegments = new GameObject[ mapLength ];
+        gameSettings = GetComponent<GameSettings>();
+
+        tunnelSegments = new GameObject[ gameSettings.mapLength ];
         tunnelSegments[0] = tunnelPart;
 
         GenerateMap();
-        
     }
 
     void GenerateMap() {
@@ -31,7 +30,7 @@ public class TunnelController : MonoBehaviour {
         Vector3 lastPosition;
         lastPosition = Vector3.zero;
 
-        for( int i = 1; i < mapLength; i++ ) {
+        for( int i = 1; i < gameSettings.mapLength; i++ ) {
 
             Vector3 newPosition = new Vector3(
 
