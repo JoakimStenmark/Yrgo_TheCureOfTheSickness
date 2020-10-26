@@ -7,23 +7,38 @@ public class TunnelController : MonoBehaviour
 
     public GameObject tunnelPart;
 
-    public GameObject[] tunnelSegments;
+    GameObject[] tunnelSegments;
+    public Vector3[] navPoint;
 
     public int mapLength = 50;
     public float offset;
     public float zOffset;
+
+    bool debug = true;
 
     void Start() {
 
         tunnelSegments = new GameObject[ mapLength ];
         tunnelSegments[0] = tunnelPart;
 
+        navPoint = new Vector3[ mapLength ];
+
         GenerateMap();
+        GeneratePath();
     }
 
     void Update() {
-        
-        
+
+        if( debug ) {
+
+            for( int i = 0; i < navPoint.Length; i++ ) {
+
+                if( i < navPoint.Length - 1 ) {
+
+                    Debug.DrawLine(navPoint[ i ], navPoint[ i + 1 ]);
+                }
+            }
+        }
     }
 
     void GenerateMap() {
@@ -45,6 +60,14 @@ public class TunnelController : MonoBehaviour
             tunnelSegments[i] = obj;
 
             lastPosition = newPosition;
+        }
+    }
+
+    void GeneratePath() {
+
+        for( int i = 0; i < navPoint.Length; i++ ) {
+
+            navPoint[ i ] = tunnelSegments[ i ].transform.position; 
         }
     }
 }
