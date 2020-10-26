@@ -12,8 +12,9 @@ public class TargetReticule : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
-        transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20);
         
+        transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
+           
     }
 }
