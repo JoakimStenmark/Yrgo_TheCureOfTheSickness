@@ -72,7 +72,7 @@ public class PathManager : MonoBehaviour {
 
             pathGoal = new Vector3(xyVector.x, xyVector.y, pathGoal.z);
 
-            returnValue = Vector3.MoveTowards(currentPosition, pathGoal, speed * Time.deltaTime);
+            returnValue = pathGoal;// Vector3.MoveTowards(currentPosition, pathGoal, speed * Time.deltaTime);
         }
 
         return returnValue;
