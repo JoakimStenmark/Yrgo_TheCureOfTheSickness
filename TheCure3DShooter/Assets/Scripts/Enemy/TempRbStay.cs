@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿//Robert S
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TempRbStay : MonoBehaviour
 {
-    public Vector3 targetPos;
+    public Transform target;
     Rigidbody rb;
 
     public float positionDampen = 0.8f;
@@ -12,7 +13,7 @@ public class TempRbStay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetPos= transform.position;
+        target.position = transform.position;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -26,7 +27,7 @@ public class TempRbStay : MonoBehaviour
 
     void stabilezePosition()
     {
-        Vector3 forceDirToTarget =targetPos- transform.position;
+        Vector3 forceDirToTarget = target.position - transform.position;
         float forceToTarget = forceDirToTarget.sqrMagnitude;
         forceToTarget *= positionDampen;
         rb.AddForce(forceDirToTarget * forceToTarget, ForceMode.VelocityChange);
