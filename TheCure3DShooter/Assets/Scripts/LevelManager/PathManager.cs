@@ -10,8 +10,6 @@ public class PathManager : MonoBehaviour {
     [SerializeField]
     List<Path> pathList;
 
-    public float smoothSpeed;
-
     public void Start() {
 
         gameController = GameObject.FindGameObjectWithTag(Tags.gameController);
@@ -44,7 +42,10 @@ public class PathManager : MonoBehaviour {
 
                 if( i > 0 ) {
 
-                    Gizmos.DrawLine (path.pathPoint[ i - 1 ], path.pathPoint[ i ]);
+                    if( gameSettings.debug ) {
+
+                        Debug.DrawLine(path.pathPoint[ i - 1 ], path.pathPoint[ i ]);
+                    }
                     Gizmos.DrawSphere(path.pathPoint[ i ], 0.5f);
                 }
             }
@@ -67,7 +68,7 @@ public class PathManager : MonoBehaviour {
         return returnValue;
     }
 
-    public Vector3 FollowPathSmooth( string pathName, Vector3 currentPosition, float speed ) {
+    public Vector3 FollowPathSmooth( string pathName, Vector3 currentPosition, float speed , float smoothSpeed) {
 
         Vector3 returnValue = currentPosition;
 
@@ -77,14 +78,10 @@ public class PathManager : MonoBehaviour {
 
             Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
 
-            float distance = Vector3.Distance(currentPosition, pathGoal);
-
             Vector2 xyTarget = new Vector2(pathGoal.x, pathGoal.y);
             Vector2 xyCurrent = new Vector2(currentPosition.x, currentPosition.y);
 
-            float step = smoothSpeed * Time.deltaTime;
-
-            Vector2 xyVector = Vector2.MoveTowards(xyCurrent, xyTarget, step);
+            Vector2 xyVector = Vector2.MoveTowards(xyCurrent, xyTarget, smoothSpeed * Time.deltaTime);
 
             pathGoal = new Vector3(xyVector.x, xyVector.y, pathGoal.z);
 
@@ -94,7 +91,7 @@ public class PathManager : MonoBehaviour {
         return returnValue;
     }
 
-    public Vector3 FollowPlayerLerp( string pathName, Vector3 currentPosition, Transform player, float speed ) {
+    public Vector3 FollowPathSmooth( string pathName, Vector3 currentPosition, float smoothSpeed ) {
 
         Vector3 returnValue = currentPosition;
 
@@ -104,23 +101,44 @@ public class PathManager : MonoBehaviour {
 
             Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
 
-            float distance = Vector3.Distance(currentPosition, pathGoal);
-
             Vector2 xyTarget = new Vector2(pathGoal.x, pathGoal.y);
             Vector2 xyCurrent = new Vector2(currentPosition.x, currentPosition.y);
-            Vector2 xyPlayer = new Vector2(player.position.x, player.position.y);
 
-            float step = smoothSpeed * Time.deltaTime;
+            Vector2 xyVector = Vector2.MoveTowards(xyCurrent, xyTarget, smoothSpeed * Time.deltaTime);
 
-            Vector2 xySmoothed = Vector2.Lerp (xyCurrent, xyTarget, smoothSpeed);
-
-            pathGoal = new Vector3(xySmoothed.x, xySmoothed.y, pathGoal.z);
-
-            returnValue = Vector3.Lerp(currentPosition, pathGoal, speed);
+            returnValue = new Vector3(xyVector.x, xyVector.y, currentPosition.z);
         }
 
         return returnValue;
     }
+
+//     public Vector3 FollowPlayerLerp( string pathName, Vector3 currentPosition, Transform player, float speed ) {
+// 
+//         Vector3 returnValue = currentPosition;
+// 
+//         Path path = FindPath(pathName);
+// 
+//         if( path != null ) {
+// 
+//             Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
+// 
+//             float distance = Vector3.Distance(currentPosition, pathGoal);
+// 
+//             Vector2 xyTarget = new Vector2(pathGoal.x, pathGoal.y);
+//             Vector2 xyCurrent = new Vector2(currentPosition.x, currentPosition.y);
+//             Vector2 xyPlayer = new Vector2(player.position.x, player.position.y);
+// 
+//             float step = smoothSpeed * Time.deltaTime;
+// 
+//             Vector2 xySmoothed = Vector2.Lerp (xyCurrent, xyTarget, smoothSpeed);
+// 
+//             pathGoal = new Vector3(xySmoothed.x, xySmoothed.y, pathGoal.z);
+// 
+//             returnValue = Vector3.Lerp(currentPosition, pathGoal, speed);
+//         }
+// 
+//         return returnValue;
+//     }
 
     Path FindPath( string pathName ) {
 

@@ -18,9 +18,7 @@ public class CameraController : MonoBehaviour {
     Vector3 pathGoal;
 
     public float moveSpeed;
-    float lerpStep = 0;
-
-    int pathStep = 0;
+    public float xySmoothSpeed;
 
     void Start() {
 
@@ -32,9 +30,12 @@ public class CameraController : MonoBehaviour {
         //player = GameObject.FindGameObjectWithTag (Tags.player);
     }
 
-    void FixedUpdate() {
+    void Update() {
 
-        transform.position = pathManager.FollowPathSmooth("TunnelPath", transform.position, moveSpeed);
+        Vector3 pathPosition = pathManager.FollowPathSmooth("TunnelPath", transform.position, xySmoothSpeed);
+
+        transform.position = new Vector3(pathPosition.x, pathPosition.y, transform.position.z + moveSpeed * Time.deltaTime);
+
        // Vector3 newPosition = pathManager.FollowPathSmooth("TunnelPath", transform.position, moveSpeed);
 
 //         transform.position = new Vector3(

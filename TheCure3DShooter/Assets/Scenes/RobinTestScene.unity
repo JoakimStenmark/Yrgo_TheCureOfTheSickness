@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 783644216}
+    - target: {fileID: 768405299507962292, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: xySmoothSpeed
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 768405299507962293, guid: 297202174d2ecf942aab17debec8399c, type: 3}
       propertyPath: m_Name
       value: CameraMan
