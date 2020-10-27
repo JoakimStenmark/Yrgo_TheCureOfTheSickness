@@ -25,7 +25,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void LaserBeam()
     {
-        Debug.DrawRay(transform.position, transform.forward * speed * Time.fixedDeltaTime, Color.red,1);
+        //Debug.DrawRay(transform.position, transform.forward * speed * Time.fixedDeltaTime, Color.red,1);
 
         RaycastHit rayHit;
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, speed * Time.fixedDeltaTime, rayMask)){

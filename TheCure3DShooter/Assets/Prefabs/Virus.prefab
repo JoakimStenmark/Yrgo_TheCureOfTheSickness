@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetDir: {x: 0, y: 0, z: 0}
+  addTunnelMovement: {x: 0, y: 0, z: 0}
   cruseSpeed: 10
+  forceType: 5
   patrolDirections:
   - {x: 0, y: 2, z: 0}
   - {x: 2, y: 0, z: 0}
@@ -137,4 +139,5 @@ MonoBehaviour:
   reactToPlayerDist: 10
   player: {fileID: 0}
   projectileType: {fileID: 6139661058921044409, guid: 5b7e4a85dc2ee1e4cb2d6b83a7730fe0, type: 3}
-  fireRate: 2
+  fireRate: 10
+  randomFireAtStart: 1

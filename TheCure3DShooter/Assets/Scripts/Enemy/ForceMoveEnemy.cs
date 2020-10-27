@@ -29,12 +29,15 @@ public class ForceMoveEnemy : MonoBehaviour
     public bool randomFireAtStart = true;
     private float timeToNextShoot;
 
+    public float destroyAtDistance = 40;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         speed = cruseSpeed;
+
+        rb.velocity = addTunnelMovement;
 
         if (randomFireAtStart)
         {
@@ -74,7 +77,7 @@ public class ForceMoveEnemy : MonoBehaviour
             Fire();
 
         //Debug
-        Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
+        //Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
     }
 
     private void Fire()

@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPreFab: {fileID: 8333258124054140693, guid: aa0885c6c02b28b4b83abe6d4bf50568, type: 3}
-  numberOfEnemys: 10
-  spawnBoxPositionOffset: {x: 0, y: 0, z: 0}
-  spawnBoxWidh: 5
+  spawnAtDistance: 40
+  numberOfEnemys: 9
+  spawnBoxPositionOffset: {x: -2.5, y: 2.5, z: 0}
+  spawnBoxWidh: 6
   spawnSpaceing: 2
-  addTunnelMotion: {x: 0, y: 0, z: 0.5}
+  addTunnelMotion: {x: 0, y: 0, z: 7}
