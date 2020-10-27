@@ -66,7 +66,7 @@ public class EnemyCluster : MonoBehaviour
             //Todo: fix this nice
             ForceMoveEnemy fme = spawedEnemys[i].GetComponent<ForceMoveEnemy>();
             fme.addTunnelMovement = addTunnelMotion;
-            fme.destroyAtDistance = spawnAtDistance;
+            fme.destroyAtDistance = spawnAtDistance + spawnAtDistance;
 
             x += spawnSpaceing;
         }

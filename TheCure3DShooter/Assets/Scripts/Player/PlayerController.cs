@@ -76,17 +76,18 @@ public class PlayerController : MonoBehaviour
 
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal, moveVertical);
 
         if (movement.sqrMagnitude > 1)
         {
             movement.Normalize();
         }
-        
-        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z + forwardSpeed));
-        
-        rb.AddForce(movement * directionalSpeed);
 
+        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z + forwardSpeed));
+        Vector3 thrust = new Vector3(0, 0, forwardSpeed);
+
+        rb.AddForce(movement * directionalSpeed);
+        //rb.AddForce(thrust);
     }
 
 }
