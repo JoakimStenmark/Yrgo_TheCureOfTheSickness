@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
+    public float maxTimeAlive;
+    private float timer;
+
     [Header("Settings")]
     public LayerMask rayMask;
     public bool laser = true;
@@ -13,10 +16,32 @@ public class PlayerProjectile : MonoBehaviour
 
     [Header("FX")]
     public GameObject onHitFX;
+
+    private void OnEnable()
+    {
+         
+        
+        //Transform playerTransform = GetComponentInParent<Transform>();
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        transform.SetPositionAndRotation(playerTransform.position, playerTransform.rotation);
+        timer = maxTimeAlive;
+    }
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer < 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     void FixedUpdate()
     {
         if (laser)
             LaserBeam();
+
 
     }
 
@@ -31,7 +56,8 @@ public class PlayerProjectile : MonoBehaviour
             {
                 Instantiate(onHitFX, transform.position, Quaternion.identity);
             }
-            Destroy(gameObject);
+            
+            gameObject.SetActive(false);
         }
         transform.position += transform.forward * speed * Time.fixedDeltaTime;
     }
