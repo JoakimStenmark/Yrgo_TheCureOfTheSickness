@@ -27,13 +27,6 @@ public class EnemyCluster : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Update()
-    {
-        if (player.transform.position.z < transform.position.z + 20)
-        {
-            SpawEnemysInBox();
-        }
-    }
     public void SpawEnemysInBox()
     {
         spawedEnemys = new GameObject[numberOfEnemys];
@@ -77,6 +70,12 @@ public class EnemyCluster : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             DestroyAll();
+        }
+
+        //TODO: remove when better
+        if (player.transform.position.z < transform.position.z + 20)
+        {
+            SpawEnemysInBox();
         }
     }
 }
