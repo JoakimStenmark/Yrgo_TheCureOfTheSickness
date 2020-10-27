@@ -76,6 +76,8 @@ public class ForceMoveEnemy : MonoBehaviour
         if (projectileType != null)
             Fire();
 
+        DesroyAtDist();
+
         //Debug
         //Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
     }
@@ -104,11 +106,21 @@ public class ForceMoveEnemy : MonoBehaviour
         }
         return patrolDirections[d];
     }
+    private void DesroyAtDist()
+    {
+        Vector3 dirToPlayer = player.transform.position - transform.position;
+        float distToPlayer = dirToPlayer.sqrMagnitude;
+        if(distToPlayer > destroyAtDistance)
+        {
+            Destroy(gameObject);
+        }
 
+    }
     private Vector3 ChasePlayer(Vector3 currentTarget)
     {
         Vector3 dirToPlayer = player.transform.position - transform.position;
         float distToPlayer = dirToPlayer.sqrMagnitude;
+        
         if (distToPlayer < reactToPlayerDist * reactToPlayerDist)
         {
             speed = chaseSpeed;
