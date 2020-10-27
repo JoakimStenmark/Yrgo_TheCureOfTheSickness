@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &783644216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3453233434985935786, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
+  m_PrefabInstance: {fileID: 1078376872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1078376872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,6 +244,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 768405299507962292, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 783644216}
     - target: {fileID: 768405299507962293, guid: 297202174d2ecf942aab17debec8399c, type: 3}
       propertyPath: m_Name
       value: CameraMan
@@ -396,6 +405,10 @@ PrefabInstance:
     - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: tunnelLength
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: smoothSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871999, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: m_Name

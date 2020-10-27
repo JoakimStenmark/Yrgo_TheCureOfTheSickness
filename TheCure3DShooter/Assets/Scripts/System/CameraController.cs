@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour {
 
     void Update() {
 
-        transform.LookAt(player.transform);
-        transform.position = pathManager.FollowPath("TunnelPath", transform.position, moveSpeed);
+        transform.position = pathManager.FollowPathSmooth("TunnelPath", transform.position, moveSpeed);
+        //transform.LookAt(player.transform);
     }
 }

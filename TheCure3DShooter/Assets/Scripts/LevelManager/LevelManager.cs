@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject[] levelParts; 
 
     public int tunnelLength;
+    public int pathPointStep = 5;
 
     public float xyOffset;
     public float zOffset;
@@ -39,7 +40,7 @@ public class LevelManager : MonoBehaviour {
         Vector3 lastPosition;
         lastPosition = Vector3.zero;
 
-        for( int i = 1; i < tunnelLength; i++ ) {
+        for( int i = 0; i < tunnelLength; i++ ) {
 
             Vector3 newPosition = new Vector3(
 
@@ -51,7 +52,17 @@ public class LevelManager : MonoBehaviour {
 
             tunnelSegments[ i ] = Instantiate( levelParts[0], newPosition, Quaternion.identity );
             tunnelSegments[ i ].transform.parent = transform;
-            pathManager.AddPoint( "TunnelPath", newPosition );
+
+            if( i == 0 ) {
+
+                pathManager.AddPoint("TunnelPath", newPosition);
+            }
+
+            if( i % pathPointStep == 0 ) {
+
+                pathManager.AddPoint("TunnelPath", newPosition);
+            }
+
             lastPosition = newPosition;
         }
     }

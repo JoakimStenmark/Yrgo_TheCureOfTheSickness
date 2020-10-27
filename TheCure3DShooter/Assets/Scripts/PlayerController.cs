@@ -45,5 +45,4 @@ public class PlayerController : MonoBehaviour
         
         rb.AddForce(movement * directionalSpeed);
     }
-
 }

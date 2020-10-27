@@ -8,7 +8,7 @@ public class Path {
     public string name;
 
     [SerializeField]
-    List<Vector3> pathPoint = new List<Vector3>();
+    public List<Vector3> pathPoint = new List<Vector3>();
 
     public void AddPoint( Vector3 point ) {
 
