@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 8146174298845888122}
   - component: {fileID: 5089874380334248415}
   - component: {fileID: 7009336607836718357}
+  - component: {fileID: 5344526651494866071}
   m_Layer: 0
   m_Name: Tunnel_Segment
   m_TagString: Untagged
@@ -174,3 +175,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5344526651494866071
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810966054987654336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 905485977951547768, guid: 95c56b9b0f367084998cf903688cbbbc, type: 3}
