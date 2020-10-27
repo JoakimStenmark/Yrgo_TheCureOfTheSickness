@@ -11,6 +11,8 @@ public class EnemyProjectile : MonoBehaviour
 
     public float speed = 10;
 
+    public float life = 2;
+
     [Header ("FX")]
     public GameObject onHitFX;
     public float explosionForce = 10f;
@@ -39,5 +41,11 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);
         }
         transform.position += transform.forward * speed * Time.fixedDeltaTime;
+
+        life -= Time.deltaTime;
+        if(life < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

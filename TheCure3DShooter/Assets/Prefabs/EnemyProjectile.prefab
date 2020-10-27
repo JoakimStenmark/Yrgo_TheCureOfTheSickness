@@ -100,4 +100,6 @@ MonoBehaviour:
   laser: 1
   homingMissile: 0
   speed: 10
+  life: 2
   onHitFX: {fileID: 415542339994477195, guid: 67b7a26e1449df04e9d063aa61e52c32, type: 3}
+  explosionForce: 10
