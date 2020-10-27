@@ -6,7 +6,8 @@ using UnityEngine;
 public class TargetReticule : MonoBehaviour
 {
 
-    public float distanceFromCamera;
+    public float distanceFromPlayer;
+    public float distanceBetweenPlayerAndCamera;
 
     void Start()
     {
@@ -15,7 +16,11 @@ public class TargetReticule : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceFromCamera);
+        distanceBetweenPlayerAndCamera = GetComponentInParent<Transform>().position.z - Camera.main.transform.position.z;
+
+        Debug.Log(GetComponentInParent<Transform>().position.z);
+
+        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceFromPlayer);
         
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
            
