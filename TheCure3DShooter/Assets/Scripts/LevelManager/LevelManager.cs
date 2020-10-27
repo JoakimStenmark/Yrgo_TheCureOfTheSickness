@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
+    List<GameObject> ObjectList = new List<GameObject>();
+
     GameSettings gameSettings;
     PathManager pathManager;
 
     GameObject player;
 
-    public GameObject tunnelPart; 
+    public GameObject tunnelPart;
+    public GameObject lightPart;
     public GameObject enemySpawner;
 
     public int tunnelLength;
@@ -30,10 +33,10 @@ public class LevelManager : MonoBehaviour {
 
         tunnelSegments = new GameObject[ tunnelLength ];
 
-        GenerateTunnel();
+        GenerateLevel();
     }
 
-    public void GenerateTunnel() {
+    public void GenerateLevel() {
 
         pathManager.NewPath("TunnelPath");
 
@@ -63,12 +66,21 @@ public class LevelManager : MonoBehaviour {
                 
             }
 
-            if( i % enemySpawnFrequency == 0  && enemySpawner != null) {
+            if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null) {
 
-                Instantiate(enemySpawner, newPosition, Quaternion.identity);
+                AddObject(enemySpawner, newPosition);
             }
 
             lastPosition = newPosition;
         }
+    }
+
+    void AddObject(GameObject objectToAdd, Vector3 position) {
+
+        GameObject newObject;
+
+        newObject = Instantiate(objectToAdd, position, Quaternion.identity);
+
+        ObjectList.Add(newObject);
     }
 }
