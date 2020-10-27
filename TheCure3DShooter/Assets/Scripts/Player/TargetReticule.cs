@@ -14,7 +14,7 @@ public class TargetReticule : MonoBehaviour
         
     }
 
-    void Update()
+    void LateUpdate()
     {
         distanceBetweenPlayerAndCamera = GetComponentInParent<Transform>().position.z - Camera.main.transform.position.z;
 
