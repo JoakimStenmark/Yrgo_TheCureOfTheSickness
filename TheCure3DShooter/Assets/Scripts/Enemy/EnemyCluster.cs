@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class EnemyCluster : MonoBehaviour
 {
@@ -17,12 +18,22 @@ public class EnemyCluster : MonoBehaviour
     public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
 
     private GameObject[] spawedEnemys;
+
+    private GameObject player;
     // Start is called before the first sframe update
     void Start()
     {
         SpawEnemysInBox();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private void Update()
+    {
+        if (player.transform.position.z < transform.position.z + 20)
+        {
+            SpawEnemysInBox();
+        }
+    }
     public void SpawEnemysInBox()
     {
         spawedEnemys = new GameObject[numberOfEnemys];
