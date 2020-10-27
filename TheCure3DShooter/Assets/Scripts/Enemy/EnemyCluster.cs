@@ -66,6 +66,7 @@ public class EnemyCluster : MonoBehaviour
             //Todo: fix this nice
             ForceMoveEnemy fme = spawedEnemys[i].GetComponent<ForceMoveEnemy>();
             fme.addTunnelMovement = addTunnelMotion;
+            fme.destroyAtDistance = spawnAtDistance;
 
             x += spawnSpaceing;
         }
@@ -78,11 +79,12 @@ public class EnemyCluster : MonoBehaviour
 
     public void DestroyAll()
     {
+        /*
         for (int i = 0; i < spawedEnemys.Length; i++)
         {
             Destroy(spawedEnemys[i]);
         }
-
+        */
         Destroy(gameObject);
     }
 
