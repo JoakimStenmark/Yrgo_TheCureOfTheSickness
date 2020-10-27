@@ -13,6 +13,7 @@ public class EnemyProjectile : MonoBehaviour
 
     [Header ("FX")]
     public GameObject onHitFX;
+    public float explosionForce = 10f;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -30,6 +31,11 @@ public class EnemyProjectile : MonoBehaviour
             if (onHitFX != null)
             {
                 Instantiate(onHitFX, transform.position, Quaternion.identity);
+                Rigidbody hitRB = rayHit.collider.GetComponent<Rigidbody>();
+                if(hitRB != null)
+                {
+                    hitRB.AddForceAtPosition(rayHit.normal * -explosionForce, rayHit.point, ForceMode.Impulse);
+                }
             }
             Destroy(gameObject);
         }

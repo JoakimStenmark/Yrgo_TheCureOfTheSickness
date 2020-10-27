@@ -44,9 +44,9 @@ public class EnemyMovement : MonoBehaviour
 
         if (randomSpin)
         {
-            transform.RotateAround(transform.up, RandomSpinTimeOne * Time.deltaTime);
-            transform.RotateAround(transform.right, RandomSpinTimeTwo * Time.deltaTime);
-            transform.RotateAround(transform.forward, RandomSpinTimeTre * Time.deltaTime);
+            transform.Rotate(transform.up, RandomSpinTimeOne * Time.deltaTime);
+            transform.Rotate(transform.right, RandomSpinTimeTwo * Time.deltaTime);
+            transform.Rotate(transform.forward, RandomSpinTimeTre * Time.deltaTime);
         }
     }
 

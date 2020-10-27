@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class EnemyCluster : MonoBehaviour
 {
+    [Header("EnemyType")]
+    public GameObject EnemyPreFab;
+
+    [Header("Settings")]
     public int numberOfEnemys;
     public Vector3 spawnBoxPositionOffset = Vector3.zero;
     public float spawnBoxWidh = 5;
     public float spawnSpaceing = 1;
-    public GameObject EnemyPreFab;
-    
+
+    [Header("TunnelMotion")]
+    public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
+
     private GameObject[] spawedEnemys;
-    // Start is called before the first frame update
+    // Start is called before the first sframe update
     void Start()
     {
         SpawEnemysInBox();
@@ -25,15 +31,23 @@ public class EnemyCluster : MonoBehaviour
         float y = 0;
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            if(x > spawnBoxWidh)
+            if (x > spawnBoxWidh)
             {
                 y -= spawnSpaceing;
                 x = 0;
             }
 
-            spawedEnemys[i] = Instantiate(EnemyPreFab, transform.position + spawnBoxPositionOffset + new Vector3(x,y,0), Quaternion.identity);
+            spawedEnemys[i] = Instantiate(EnemyPreFab, transform.position + spawnBoxPositionOffset + new Vector3(x, y, 0), Quaternion.identity);
+
+            //Todo: fix this nice
+            ForceMoveEnemy fme = spawedEnemys[i].GetComponent<ForceMoveEnemy>();
+            fme.addTunnelMovement = addTunnelMotion;
+
             x += spawnSpaceing;
         }
+
+        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * x, Color.yellow, 2);
+        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.up * y, Color.yellow, 2);
     }
 
     public void DestroyAll()

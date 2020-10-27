@@ -8,10 +8,12 @@ public class ForceMoveEnemy : MonoBehaviour
     public Vector3 targetDir;
     private Rigidbody rb;
     private float speed = 10;
+    public Vector3 addTunnelMovement;
 
     [Header("Behaviour")]
     [Header("Passive")]
     public float cruseSpeed = 10;
+    public ForceMode forceType = ForceMode.Acceleration;
     public Vector3[] patrolDirections;
     public float patrolDirTime = 5;
     private int d = 0;
@@ -66,8 +68,8 @@ public class ForceMoveEnemy : MonoBehaviour
         float speedMul = BrakeSpeedMul(targetDir, rb.velocity);
         if (speedMul < 0)
             print("Smaller then zero" + speedMul);
-        rb.AddForce(targetDir * speed * speedMul * Time.deltaTime);
-
+        rb.AddForce(targetDir * speed * speedMul * Time.deltaTime, forceType);
+        rb.AddForce(addTunnelMovement * Time.fixedDeltaTime, ForceMode.VelocityChange);
         if (projectileType != null)
             Fire();
 
