@@ -27,20 +27,55 @@ public class PathManager : MonoBehaviour {
         }
     }
 
-    public void NewPath( string name ) {
+    public Vector3 FollowPath( string pathName, Vector3 currentPosition, float speed ) {
+
+        Vector3 returnValue = currentPosition;
+
+        Path path = FindPath(pathName);
+
+        if( path != null ) {
+
+            Vector3 pathGoal = path.CurrentPathGoal( currentPosition );
+
+            Debug.Log ("path goal: " + pathGoal);
+
+            returnValue = Vector3.MoveTowards ( currentPosition, pathGoal, speed * Time.deltaTime );
+            
+            Debug.Log ("returnvalue: " + returnValue);
+        }
+
+        return returnValue;
+    }
+
+    Path FindPath( string pathName ) {
+
+        Path returnValue = null;
+
+        foreach( Path path in pathList ) {
+
+            if( path.name == pathName ) {
+
+                return path;
+            }
+        }
+
+        return returnValue;
+    }
+
+    public void NewPath( string pathName ) {
 
         Path newPath = new Path();
-        newPath.name = name;
+        newPath.name = pathName;
         pathList.Add(newPath);
     }
 
-    public void AddPoint( string name, Vector3 position ) {
+    public void AddPoint( string pathName, Vector3 position ) {
 
         Path tempPath = null;
 
         foreach( Path path in pathList ) {
 
-            if( path.name == name ) {
+            if( path.name == pathName ) {
                 
                 tempPath = path;
                 tempPath.AddPoint(position);
@@ -50,7 +85,7 @@ public class PathManager : MonoBehaviour {
 
         if( tempPath == null ) {
 
-            Debug.LogError ("No path with the name " + name + " found!");
+            Debug.LogError ("No path with the name " + pathName + " found!");
         }
     }
 }

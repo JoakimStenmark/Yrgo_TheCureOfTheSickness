@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 
     GameObject gameController;
     TunnelController tunnelController;
+    PathManager pathManager;
 
     [SerializeField]
     GameObject player;
@@ -26,6 +27,8 @@ public class CameraController : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag (Tags.gameController);
         tunnelController = gameController.GetComponent<TunnelController>();
 
+        pathManager = GameObject.FindGameObjectWithTag(Tags.levelManager).GetComponent<PathManager>();
+
         player = GameObject.FindGameObjectWithTag (Tags.player);
     }
 
@@ -36,6 +39,8 @@ public class CameraController : MonoBehaviour {
             lerpStep += moveSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp (pathFrom, pathGoal, lerpStep);
         }
+
+        transform.position = pathManager.FollowPath("TunnelPath", transform.position, moveSpeed);
     }
 
     public void SetPathGoal( Vector3 goal ) {
