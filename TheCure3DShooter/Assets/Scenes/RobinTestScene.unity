@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.06666667, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -251,6 +251,22 @@ PrefabInstance:
       propertyPath: field of view
       value: 26.991467
       objectReference: {fileID: 0}
+    - target: {fileID: 768405299507962294, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 768405299507962294, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.254717
+      objectReference: {fileID: 0}
+    - target: {fileID: 768405299507962294, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.0084104715
+      objectReference: {fileID: 0}
+    - target: {fileID: 768405299507962294, guid: 297202174d2ecf942aab17debec8399c, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.022566022
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 297202174d2ecf942aab17debec8399c, type: 3}
 --- !u!1001 &1009876582603722436
@@ -368,6 +384,18 @@ PrefabInstance:
     - target: {fileID: 1848526878703871987, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: levelParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8810966054987654336, guid: e5c8e3dfc535bc14c8bb26e7eae0d48c, type: 3}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: zOffset
+      value: 7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: tunnelLength
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871999, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: m_Name
