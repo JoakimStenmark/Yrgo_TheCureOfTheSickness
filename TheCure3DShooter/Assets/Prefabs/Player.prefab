@@ -44,7 +44,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3453233434985935788}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalSpeed: 1000
-  forwardSpeed: 0
+  forwardSpeed: 0.1
+  targetingReticule: {fileID: 4224011782659141449}
+  clipSize: 1
 --- !u!1 &6891589408201964436
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,10 +233,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4224011782659141449}
-  - component: {fileID: 6066823849488847309}
   - component: {fileID: 284143122280354744}
+  - component: {fileID: 6066823849488847309}
   - component: {fileID: 7589895755876436767}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Targeting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,6 +257,14 @@ Transform:
   m_Father: {fileID: 3453233434985935776}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &284143122280354744
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891589408201964436}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6066823849488847309
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -296,14 +306,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &284143122280354744
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891589408201964436}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &7589895755876436767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,3 +318,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98d09e33e849574a874100c69abccaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceFromCamera: 18
