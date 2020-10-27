@@ -6,6 +6,8 @@ public class TunnelController : MonoBehaviour {
 
     GameSettings gameSettings;
 
+    public int tunnelLength = 10;
+
     public bool tunnelGenerated = false;
 
     public GameObject tunnelPart;
@@ -19,7 +21,7 @@ public class TunnelController : MonoBehaviour {
 
         gameSettings = GetComponent<GameSettings>();
 
-        tunnelSegments = new GameObject[ gameSettings.mapLength ];
+        tunnelSegments = new GameObject[ tunnelLength ];
         tunnelSegments[0] = tunnelPart;
 
         GenerateMap();
@@ -30,7 +32,7 @@ public class TunnelController : MonoBehaviour {
         Vector3 lastPosition;
         lastPosition = Vector3.zero;
 
-        for( int i = 1; i < gameSettings.mapLength; i++ ) {
+        for( int i = 1; i < tunnelLength; i++ ) {
 
             Vector3 newPosition = new Vector3(
 
@@ -39,13 +41,10 @@ public class TunnelController : MonoBehaviour {
                 i * zOffset
             );
 
-            GameObject obj = Instantiate(tunnelPart, newPosition, Quaternion.identity);
 
-            tunnelSegments[i] = obj;
+            tunnelSegments[ i ] = Instantiate(tunnelPart, newPosition, Quaternion.identity);
 
             lastPosition = newPosition;
         }
-
-        tunnelGenerated = true;
     }
 }
