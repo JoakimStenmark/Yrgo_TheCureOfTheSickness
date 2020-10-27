@@ -23,7 +23,7 @@ public class EnemyCluster : MonoBehaviour
     // Start is called before the first sframe update
     void Start()
     {
-        SpawEnemysInBox();
+        //SpawEnemysInBox();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -76,6 +76,7 @@ public class EnemyCluster : MonoBehaviour
         if (player.transform.position.z < transform.position.z + 20)
         {
             SpawEnemysInBox();
+            Destroy(gameObject);
         }
     }
 }
