@@ -74,7 +74,7 @@ public class ForceMoveEnemy : MonoBehaviour
             Fire();
 
         //Debug
-        Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
+        //Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
     }
 
     private void Fire()

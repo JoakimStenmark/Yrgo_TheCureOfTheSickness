@@ -9,6 +9,8 @@ public class EnemyCluster : MonoBehaviour
     public GameObject EnemyPreFab;
 
     [Header("Settings")]
+    public float spawnAtDistance = 10;
+
     public int numberOfEnemys;
     public Vector3 spawnBoxPositionOffset = Vector3.zero;
     public float spawnBoxWidh = 5;
@@ -18,15 +20,33 @@ public class EnemyCluster : MonoBehaviour
     public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
 
     private GameObject[] spawedEnemys;
-
+    private bool birth = false;
     private GameObject player;
     // Start is called before the first sframe update
     void Start()
     {
-        //SpawEnemysInBox();
+        spawnAtDistance *= spawnAtDistance;
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
+    // Update is called once per frame
+    void Update()
+    {
+        if (birth)
+        {
+            if ((transform.position - player.transform.position).sqrMagnitude > spawnAtDistance)
+            {
+                DestroyAll();
+            }
+        }
+        else
+        {
+            if ((transform.position - player.transform.position).sqrMagnitude < spawnAtDistance)
+            {
+                SpawEnemysInBox();
+                birth = true;
+            }
+        }
+    }
     public void SpawEnemysInBox()
     {
         spawedEnemys = new GameObject[numberOfEnemys];
@@ -50,8 +70,10 @@ public class EnemyCluster : MonoBehaviour
             x += spawnSpaceing;
         }
 
-        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * x, Color.yellow, 2);
+        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, Color.yellow, 2);
         Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.up * y, Color.yellow, 2);
+        
+        Debug.DrawLine(transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, transform.position + spawnBoxPositionOffset+ transform.right * spawnBoxWidh + transform.up * y, Color.yellow, 2);
     }
 
     public void DestroyAll()
@@ -64,19 +86,5 @@ public class EnemyCluster : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            DestroyAll();
-        }
-
-        //TODO: remove when better
-        if (player.transform.position.z < transform.position.z + 20)
-        {
-            SpawEnemysInBox();
-            Destroy(gameObject);
-        }
-    }
+   
 }
