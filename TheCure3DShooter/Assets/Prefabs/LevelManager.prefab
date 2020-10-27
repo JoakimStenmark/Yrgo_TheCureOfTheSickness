@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1848526878703871987}
   - component: {fileID: 1848526878703871996}
   - component: {fileID: 1848526878703871997}
-  - component: {fileID: 1848526878703871986}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: LevelManager
@@ -45,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818de954326f8ce429c0f06ab2b16cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelParts:
-  - {fileID: 8562524358117726015, guid: c09231ce6803d8a4baeb5906729948a1, type: 3}
+  tunnelPart: {fileID: 0}
+  enemySpawner: {fileID: 0}
   tunnelLength: 500
+  pathPointStep: 5
+  enemySpawnFrequency: 50
   xyOffset: 0.7
   zOffset: 5.2
   tunnelSegments: []
@@ -64,15 +65,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathList: []
---- !u!114 &1848526878703871986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848526878703871999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc3bdb672eb9174992c3b02cd0c9e43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  smoothSpeed: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField]
     private float directionalSpeed;
     [SerializeField]
@@ -16,17 +17,19 @@ public class PlayerController : MonoBehaviour
 
     RaycastHit hit;
 
+    [Header("Weapon")]
     public int clipSize = 1;
-    GameObject laserShot;
+    public GameObject laserShotPrefab;
     GameObject[] laserShots;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         laserShots = new GameObject[clipSize];
-        foreach (GameObject laserShot in laserShots)
+
+        for (int i = 0; i < laserShots.Length; i++)
         {
-            //laserShot = 
+            laserShots[i] = Instantiate(laserShotPrefab);
         }
         
     }
@@ -55,6 +58,16 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("hit a " + hit.collider.gameObject.name);
         }
+
+        foreach (GameObject laserShot in laserShots)
+        {
+            if (!laserShot.activeSelf)
+            {
+                laserShot.SetActive(true);
+                break;
+            }
+        }
+
     }
 
     void Movement()

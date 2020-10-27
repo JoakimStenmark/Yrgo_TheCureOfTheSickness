@@ -221,9 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalSpeed: 1000
-  forwardSpeed: 0.1
+  forwardSpeed: 0
   targetingReticule: {fileID: 4224011782659141449}
-  clipSize: 1
+  clipSize: 5
+  laserShotPrefab: {fileID: 4141149953612772833, guid: 8825a0ed8db3ef74da95afbeb39007dc, type: 3}
 --- !u!1 &6891589408201964436
 GameObject:
   m_ObjectHideFlags: 0
