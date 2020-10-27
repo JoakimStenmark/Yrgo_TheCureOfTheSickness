@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour {
         tunnelSegments = new GameObject[ tunnelLength ];
 
         GenerateTunnel();
-
     }
 
     public void GenerateTunnel() {
@@ -51,6 +50,7 @@ public class LevelManager : MonoBehaviour {
 
 
             tunnelSegments[ i ] = Instantiate( levelParts[0], newPosition, Quaternion.identity );
+            tunnelSegments[ i ].transform.parent = transform;
             pathManager.AddPoint( "TunnelPath", newPosition );
             lastPosition = newPosition;
         }

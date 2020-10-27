@@ -18,13 +18,16 @@ public class PathManager : MonoBehaviour {
 
     public void Update() {
 
-        if( gameSettings.debug ) {
-
-            foreach( Path path in pathList) {
-             
-                // Run though each vector3 in path here and render lines between
-            }
-        }
+//         if( gameSettings.debug ) {
+// 
+//             foreach( Path path in pathList) {
+// 
+//                 foreach( Vector3 point in path){
+// 
+// 
+//                 }
+//             }
+//         }
     }
 
     public Vector3 FollowPath( string pathName, Vector3 currentPosition, float speed ) {
