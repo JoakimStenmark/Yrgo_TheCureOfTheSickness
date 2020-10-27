@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour {
     public float xyOffset;
     public float zOffset;
 
-    public Vector3[] tunnelSegments;
+    public GameObject[] tunnelSegments;
 
     void Start() {
         
@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag( Tags.player );
 
-        tunnelSegments = new Vector3[ tunnelLength ];
+        tunnelSegments = new GameObject[ tunnelLength ];
 
         GenerateTunnel();
 
@@ -50,8 +50,8 @@ public class LevelManager : MonoBehaviour {
             );
 
 
-            tunnelSegments[ i ] = newPosition;
-            pathManager.AddPoint("TunnelPath", newPosition);
+            tunnelSegments[ i ] = Instantiate( levelParts[0], newPosition, Quaternion.identity );
+            pathManager.AddPoint( "TunnelPath", newPosition );
             lastPosition = newPosition;
         }
     }
