@@ -32,9 +32,17 @@ public class CameraController : MonoBehaviour {
         //player = GameObject.FindGameObjectWithTag (Tags.player);
     }
 
-    void Update() {
+    void FixedUpdate() {
 
         transform.position = pathManager.FollowPathSmooth("TunnelPath", transform.position, moveSpeed);
+       // Vector3 newPosition = pathManager.FollowPathSmooth("TunnelPath", transform.position, moveSpeed);
+
+//         transform.position = new Vector3(
+//         
+//             (newPosition.x + player.transform.position.x) / 2,
+//             (newPosition.y + player.transform.position.y) / 2,
+//             newPosition.z
+//             );
         //transform.LookAt(player.transform);
     }
 }

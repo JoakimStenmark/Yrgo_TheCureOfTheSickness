@@ -18,18 +18,34 @@ public class PathManager : MonoBehaviour {
         gameSettings = gameController.GetComponent<GameSettings>();
     }
 
-    public void Update() {
+//     public void Update() {
+// 
+//         if( gameSettings.debug ) {
+// 
+//             foreach( Path path in pathList ) {
+// 
+//                 for( int i = 0; i < path.pathPoint.Count; i++ ) {
+// 
+//                     if( i > 0 ) {
+// 
+//                         Debug.DrawLine(path.pathPoint[ i - 1 ], path.pathPoint[ i ]);
+//                         Gizmos.DrawSphere(path.pathPoint[i], 0.3f);
+//                     }
+//                 }
+//             }
+//         }
+//     }
 
-        if( gameSettings.debug ) {
+    void OnDrawGizmos() {
 
-            foreach( Path path in pathList ) {
+        foreach( Path path in pathList ) {
 
-                for( int i = 0; i < path.pathPoint.Count; i++ ) {
+            for( int i = 0; i < path.pathPoint.Count; i++ ) {
 
-                    if( i > 0 ) {
+                if( i > 0 ) {
 
-                        Debug.DrawLine(path.pathPoint[ i - 1 ], path.pathPoint[ i ]);
-                    }
+                    Gizmos.DrawLine (path.pathPoint[ i - 1 ], path.pathPoint[ i ]);
+                    Gizmos.DrawSphere(path.pathPoint[ i ], 0.5f);
                 }
             }
         }
@@ -73,6 +89,34 @@ public class PathManager : MonoBehaviour {
             pathGoal = new Vector3(xyVector.x, xyVector.y, pathGoal.z);
 
             returnValue = Vector3.MoveTowards(currentPosition, pathGoal, speed * Time.deltaTime);
+        }
+
+        return returnValue;
+    }
+
+    public Vector3 FollowPlayerLerp( string pathName, Vector3 currentPosition, Transform player, float speed ) {
+
+        Vector3 returnValue = currentPosition;
+
+        Path path = FindPath(pathName);
+
+        if( path != null ) {
+
+            Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
+
+            float distance = Vector3.Distance(currentPosition, pathGoal);
+
+            Vector2 xyTarget = new Vector2(pathGoal.x, pathGoal.y);
+            Vector2 xyCurrent = new Vector2(currentPosition.x, currentPosition.y);
+            Vector2 xyPlayer = new Vector2(player.position.x, player.position.y);
+
+            float step = smoothSpeed * Time.deltaTime;
+
+            Vector2 xySmoothed = Vector2.Lerp (xyCurrent, xyTarget, smoothSpeed);
+
+            pathGoal = new Vector3(xySmoothed.x, xySmoothed.y, pathGoal.z);
+
+            returnValue = Vector3.Lerp(currentPosition, pathGoal, speed);
         }
 
         return returnValue;
