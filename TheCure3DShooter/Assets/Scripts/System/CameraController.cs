@@ -30,7 +30,9 @@ public class CameraController : MonoBehaviour {
         //player = GameObject.FindGameObjectWithTag (Tags.player);
     }
 
-    void Update() {
+    void LateUpdate() {
+
+        
 
         Vector3 pathPosition = pathManager.FollowPathSmooth("TunnelPath", transform.position, xySmoothSpeed);
 
