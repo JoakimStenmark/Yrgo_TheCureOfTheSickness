@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 1070628079}
   - component: {fileID: 1070628078}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PlayArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1062,6 +1062,10 @@ PrefabInstance:
       propertyPath: lightPart
       value: 
       objectReference: {fileID: 6235411391589032830, guid: 442e082c278cc7341a9ee7b594bf73e4, type: 3}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: bloodCell
+      value: 
+      objectReference: {fileID: 2910454311137321216, guid: 87378f8191f01f74ab61983fa0b955ae, type: 3}
     - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: smoothSpeed
       value: 8.5
