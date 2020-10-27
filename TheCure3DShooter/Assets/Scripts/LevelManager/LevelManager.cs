@@ -5,12 +5,12 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     GameSettings gameSettings;
-    LevelObjectPool levelObjectPool;
     PathManager pathManager;
 
     GameObject player;
 
-    public GameObject[] levelParts; 
+    public GameObject tunnelPart; 
+    public GameObject enemySpawner;
 
     public int tunnelLength;
     public int pathPointStep = 5;
@@ -23,7 +23,6 @@ public class LevelManager : MonoBehaviour {
     void Start() {
         
         gameSettings = GetComponent<GameSettings>();
-        levelObjectPool = GetComponent<LevelObjectPool>();
         pathManager = GetComponent<PathManager>();
 
         player = GameObject.FindGameObjectWithTag( Tags.player );
@@ -50,7 +49,7 @@ public class LevelManager : MonoBehaviour {
             );
 
 
-            tunnelSegments[ i ] = Instantiate( levelParts[0], newPosition, Quaternion.identity );
+            tunnelSegments[ i ] = Instantiate(tunnelPart, newPosition, Quaternion.identity);
             tunnelSegments[ i ].transform.parent = transform;
 
             if( i == 0 ) {
@@ -61,6 +60,7 @@ public class LevelManager : MonoBehaviour {
             if( i % pathPointStep == 0 ) {
 
                 pathManager.AddPoint("TunnelPath", newPosition);
+                Instantiate(enemySpawner, newPosition, Quaternion.identity);
             }
 
             lastPosition = newPosition;

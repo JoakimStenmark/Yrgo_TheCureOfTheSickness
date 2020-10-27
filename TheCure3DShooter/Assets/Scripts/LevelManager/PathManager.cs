@@ -15,14 +15,14 @@ public class PathManager : MonoBehaviour {
     public void Start() {
 
         gameController = GameObject.FindGameObjectWithTag(Tags.gameController);
-        gameSettings = gameController.GetComponent<GameSettings>(); 
+        gameSettings = gameController.GetComponent<GameSettings>();
     }
 
     public void Update() {
 
         if( gameSettings.debug ) {
 
-            foreach( Path path in pathList) {
+            foreach( Path path in pathList ) {
 
                 for( int i = 0; i < path.pathPoint.Count; i++ ) {
 
@@ -43,9 +43,9 @@ public class PathManager : MonoBehaviour {
 
         if( path != null ) {
 
-            Vector3 pathGoal = path.CurrentPathGoal( currentPosition );
+            Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
 
-            returnValue = Vector3.MoveTowards ( currentPosition, pathGoal, speed * Time.deltaTime );
+            returnValue = Vector3.MoveTowards(currentPosition, pathGoal, speed * Time.deltaTime);
         }
 
         return returnValue;
@@ -60,8 +60,8 @@ public class PathManager : MonoBehaviour {
         if( path != null ) {
 
             Vector3 pathGoal = path.CurrentPathGoal(currentPosition);
-            
-            float distance = Vector3.Distance( currentPosition, pathGoal );
+
+            float distance = Vector3.Distance(currentPosition, pathGoal);
 
             Vector2 xyTarget = new Vector2(pathGoal.x, pathGoal.y);
             Vector2 xyCurrent = new Vector2(currentPosition.x, currentPosition.y);
@@ -107,7 +107,7 @@ public class PathManager : MonoBehaviour {
         foreach( Path path in pathList ) {
 
             if( path.name == pathName ) {
-                
+
                 tempPath = path;
                 tempPath.AddPoint(position);
                 break;
@@ -116,7 +116,7 @@ public class PathManager : MonoBehaviour {
 
         if( tempPath == null ) {
 
-            Debug.LogError ("No path with the name " + pathName + " found!");
+            Debug.LogError("No path with the name " + pathName + " found!");
         }
     }
 }
