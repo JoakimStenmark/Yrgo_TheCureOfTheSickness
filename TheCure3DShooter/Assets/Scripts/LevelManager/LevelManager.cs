@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour {
 
     public int tunnelLength;
     public int pathPointStep = 5;
+    public int enemySpawnFrequency = 50;
 
     public float xyOffset;
     public float zOffset;
@@ -48,7 +49,6 @@ public class LevelManager : MonoBehaviour {
                 i * zOffset
             );
 
-
             tunnelSegments[ i ] = Instantiate(tunnelPart, newPosition, Quaternion.identity);
             tunnelSegments[ i ].transform.parent = transform;
 
@@ -60,6 +60,11 @@ public class LevelManager : MonoBehaviour {
             if( i % pathPointStep == 0 ) {
 
                 pathManager.AddPoint("TunnelPath", newPosition);
+                
+            }
+
+            if( i % enemySpawnFrequency == 0  && enemySpawner != null) {
+
                 Instantiate(enemySpawner, newPosition, Quaternion.identity);
             }
 
