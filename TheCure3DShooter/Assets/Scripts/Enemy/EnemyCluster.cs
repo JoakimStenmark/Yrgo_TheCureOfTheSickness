@@ -27,7 +27,7 @@ public class EnemyCluster : MonoBehaviour
         {
             if(x > spawnBoxWidh)
             {
-                y += spawnSpaceing;
+                y -= spawnSpaceing;
                 x = 0;
             }
 

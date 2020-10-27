@@ -4,24 +4,49 @@ using UnityEngine;
 
 public class ForceMoveEnemy : MonoBehaviour
 {
-
-    public Vector3 target;
+    [Header("MoveVector")]
+    public Vector3 targetDir;
     private Rigidbody rb;
+    private float speed = 10;
 
-    public float straitenSpeed = 10;
-    public float speed = 10;
+    [Header("Behaviour")]
+    [Header("Passive")]
+    public float cruseSpeed = 10;
+    public Vector3[] patrolDirections;
+    public float patrolDirTime = 5;
+    private int d = 0;
+    private float timeToSwitch = 0;
 
+    [Header("Agressive")]
+    public float chaseSpeed = 20;
+    public float reactToPlayerDist = 0;
+    public GameObject player;
+    [Header("Weapon")]
+    public GameObject projectileType;
+    public float fireRate = 2;
+    public bool randomFireAtStart = true;
+    private float timeToNextShoot;
 
-    public Vector3[] patrolPath;
-    private int p = 0;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        speed = cruseSpeed;
+
+        if (randomFireAtStart)
+        {
+            timeToNextShoot = Random.Range(0, fireRate);
+        }
+        else
+        {
+            timeToNextShoot = fireRate;
+        }
     }
 
     private void Update()
     {
+        //test
         if (Input.GetButtonDown("Fire1"))
         {
             rb.AddForce(Vector3.forward * 100);
@@ -30,33 +55,97 @@ public class ForceMoveEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(patrolDirections.Length > 0)
+            targetDir = MoveInDirection();
 
-        if(patrolPath.Length > 1)
+        if(reactToPlayerDist > 0)
         {
-            target = patrolPath[p];
+            targetDir = ChasePlayer(targetDir);
         }
 
-        Vector3 dir = target - transform.position;
-        if(dir.sqrMagnitude < 2)
+        float speedMul = BrakeSpeedMul(targetDir, rb.velocity);
+        if (speedMul < 0)
+            print("Smaller then zero" + speedMul);
+        rb.AddForce(targetDir * speed * speedMul * Time.deltaTime);
+
+        if (projectileType != null)
+            Fire();
+
+        //Debug
+        Debug.DrawRay(transform.position, targetDir * 10 * speedMul, Color.green);
+    }
+
+    private void Fire()
+    {
+        timeToNextShoot -= Time.fixedDeltaTime;
+        if(timeToNextShoot < 0)
         {
-            p++;
-            if (p >= patrolPath.Length)
-                p = 0;
+            Vector3 fireDir = player.transform.position - transform.position;
+            Instantiate(projectileType, transform.position + fireDir.normalized, Quaternion.LookRotation(fireDir));
+            timeToNextShoot = fireRate;
         }
+    }
+    private Vector3 MoveInDirection()
+    {
+        timeToSwitch += Time.fixedDeltaTime;
+        if (timeToSwitch > patrolDirTime)
+        {
+            d++;
+            if (d >= patrolDirections.Length)
+            {
+                d = 0;
+            }
+            timeToSwitch = 0;
+        }
+        return patrolDirections[d];
+    }
 
+    private Vector3 ChasePlayer(Vector3 currentTarget)
+    {
+        Vector3 dirToPlayer = player.transform.position - transform.position;
+        float distToPlayer = dirToPlayer.sqrMagnitude;
+        if (distToPlayer < reactToPlayerDist * reactToPlayerDist)
+        {
+            speed = chaseSpeed;
+            return dirToPlayer;
+        }
+        return currentTarget;
+    }
 
-        Vector3 velo = rb.velocity;
-        float dot = Vector3.Dot(dir, velo);
+    private float BrakeSpeedMul(Vector3 wantedMoveDir, Vector3 actualMoveDir)
+    {
+        float dot = Vector3.Dot(wantedMoveDir.normalized, actualMoveDir.normalized);
         dot += 1;
         dot = 3 - dot;
         dot *= 2;
-        rb.AddForce(dir * speed * dot * Time.deltaTime);
+        return dot;
+    }
 
-        //Debug
-        Debug.DrawRay(transform.position, dir * 10 * dot, Color.green);
-        for (int i = 0; i < patrolPath.Length; i++)
+    /*
+    public Vector3[] patrolPath;
+    public float switchNodeSqrDist = 2;
+    private int p = 0;
+
+         if (patrolPath.Length > 1)
         {
-            Debug.DrawRay(patrolPath[i], Vector3.one, Color.blue);
+            PathControl(dir, velocity);
+        }
+
+    void PathControl(Vector3 dir, Vector3 velocity)
+    {
+        target = patrolPath[p];
+
+        //If within distance
+        if (dir.sqrMagnitude < switchNodeSqrDist)
+        {
+            //If wanted direction = wanted speed
+            if (Vector3.Dot(dir, velocity) < 0)
+            {
+                p++;
+                if (p >= patrolPath.Length)
+                    p = 0;
+            }
         }
     }
+    */
 }
