@@ -319,4 +319,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98d09e33e849574a874100c69abccaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFromCamera: 18
+  distanceFromPlayer: 30
