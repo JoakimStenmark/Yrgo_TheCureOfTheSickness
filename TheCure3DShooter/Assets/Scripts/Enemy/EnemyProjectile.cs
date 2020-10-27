@@ -19,7 +19,6 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (laser)
             LaserBeam();
-
     }
 
     private void LaserBeam()
