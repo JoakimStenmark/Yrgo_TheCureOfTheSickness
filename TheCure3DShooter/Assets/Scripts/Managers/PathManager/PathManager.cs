@@ -154,7 +154,7 @@ public class PathManager : MonoBehaviour {
         if( path == null ) {
 
             Debug.LogError( "No path with the name " + pathName + " found!" );
-            return 0;
+            return Vector3.zero;
         }
 
         return path.pathPoint[ index ];
