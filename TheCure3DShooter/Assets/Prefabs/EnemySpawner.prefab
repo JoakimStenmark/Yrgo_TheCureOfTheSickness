@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafd66b6c0cf1d34694f89287e13a8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPreFab: {fileID: 8333258124054140693, guid: aa0885c6c02b28b4b83abe6d4bf50568, type: 3}
+  EnemyPreFab: {fileID: 3875154443888520671, guid: 3b8b565b59f0dd64da8a15a7b9b02394, type: 3}
   spawnAtDistance: 40
   numberOfEnemys: 9
   spawnBoxPositionOffset: {x: -2.5, y: 2.5, z: 0}

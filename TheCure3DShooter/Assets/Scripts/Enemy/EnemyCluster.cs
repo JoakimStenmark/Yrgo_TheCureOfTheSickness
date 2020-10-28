@@ -13,15 +13,20 @@ public class EnemyCluster : MonoBehaviour
     public float spawnAtDistance = 10;
 
     public int numberOfEnemys;
+
+    [Header("SpawnPath")]
+    public float spawnRadius = 10;
+    public int spawnSegments = 24;
+    public Vector2[] patrolPath;
+
+
     public Vector3 spawnBoxPositionOffset = Vector3.zero;
     public float spawnBoxWidh = 5;
     public float spawnSpaceing = 1;
 
+
     [Header("TunnelMotion")]
     public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
-
-    private GameObject[] spawedEnemys;
-    private bool birth = false;
     private GameObject player;
 
     public GameObject railAnchor;
@@ -35,60 +40,69 @@ public class EnemyCluster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (birth)
+        if ((transform.position - player.transform.position).sqrMagnitude < spawnAtDistance)
         {
-            if ((transform.position - player.transform.position).sqrMagnitude > spawnAtDistance)
-            {
-                DestroyAll();
-            }
-        }
-        else
-        {
-            if ((transform.position - player.transform.position).sqrMagnitude < spawnAtDistance)
-            {
-                SpawEnemysInBox();
-                birth = true;
-            }
+            SpawEnemysInBox();
+            DestroySpawer();
         }
     }
     public void SpawEnemysInBox()
     {
-        spawedEnemys = new GameObject[numberOfEnemys];
-
         float x = 0;
         float y = 0;
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            if (x > spawnBoxWidh)
+            GameObject spawedEnemy = Instantiate(EnemyPreFab, transform.position, Quaternion.identity);
+
+            //TODO: fix this nice
+            //Spawn is of coded type
+            EnemyMovement enemyMoveScript = spawedEnemy.GetComponent<EnemyMovement>();
+            if (enemyMoveScript != null)
             {
-                y -= spawnSpaceing;
-                x = 0;
+                enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor);
             }
 
-            spawedEnemys[i] = Instantiate(EnemyPreFab, transform.position + spawnBoxPositionOffset + new Vector3(x, y, 0), Quaternion.identity);
 
-            //Todo: fix this nice
-            ForceMoveEnemy fme = spawedEnemys[i].GetComponent<ForceMoveEnemy>();
-            fme.addTunnelMovement = addTunnelMotion;
-            fme.destroyAtDistance = spawnAtDistance + spawnAtDistance;
+            ForceMoveEnemy fme = spawedEnemy.GetComponent<ForceMoveEnemy>();
+            //Spaw is of Physics type
+            if (fme != null)
+            {
+                if (x > spawnBoxWidh)
+                {
+                    y -= spawnSpaceing;
+                    x = 0;
+                }
 
-            x += spawnSpaceing;
+                spawedEnemy.transform.position = transform.position + spawnBoxPositionOffset + new Vector3(x, y, 0);
+                fme.addTunnelMovement = addTunnelMotion;
+                fme.destroyAtDistance = spawnAtDistance + spawnAtDistance;
+                x += spawnSpaceing;
+
+                Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, Color.yellow, 2);
+                Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.up * y, Color.yellow, 2);
+                Debug.DrawLine(transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, transform.position + spawnBoxPositionOffset+ transform.right * spawnBoxWidh + transform.up * y, Color.yellow, 2);
+            }
+
         }
-
-        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, Color.yellow, 2);
-        Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.up * y, Color.yellow, 2);
-        
-        Debug.DrawLine(transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, transform.position + spawnBoxPositionOffset+ transform.right * spawnBoxWidh + transform.up * y, Color.yellow, 2);
     }
-
-    public void DestroyAll()
+    Vector2[] CircularPath()
     {
-        /*
-        for (int i = 0; i < spawedEnemys.Length; i++)
+        Vector3 point = Vector3.up * spawnRadius;
+        patrolPath = new Vector2[spawnSegments];
+
+        float angle = 360 / spawnSegments;
+
+        for (int i = 0; i < spawnSegments; i++)
         {
-            Destroy(spawedEnemys[i]);
+            Quaternion rotstep = Quaternion.AngleAxis(angle * i, Vector3.forward);
+            patrolPath[i] = rotstep * point;
+            Debug.DrawRay(patrolPath[i], Vector3.one * 0.25f, Color.yellow, 10);
         }
-        */
+
+        return patrolPath;
+    }
+    public void DestroySpawer()
+    {
         Destroy(gameObject);
     }
 
