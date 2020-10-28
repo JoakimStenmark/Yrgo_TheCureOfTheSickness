@@ -34,8 +34,9 @@ public class EnemyCluster : MonoBehaviour
     // Start is called before the first sframe update
     void Start()
     {
+        railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
         spawnAtDistance *= spawnAtDistance;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(Tags.player);
     }
     // Update is called once per frame
     void Update()
@@ -95,7 +96,7 @@ public class EnemyCluster : MonoBehaviour
         for (int i = 0; i < spawnSegments; i++)
         {
             Quaternion rotstep = Quaternion.AngleAxis(angle * i, Vector3.forward);
-            patrolPath[i] = rotstep * point;
+            patrolPath[i] = transform.position + rotstep * point;
             Debug.DrawRay(patrolPath[i], Vector3.one * 0.25f, Color.yellow, 10);
         }
 
