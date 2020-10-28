@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,28 +13,52 @@ public class PlayerController : MonoBehaviour
     private float forwardSpeed;
  
     Rigidbody rb;
+    CapsuleCollider playerCollider;
 
     public Transform targetingReticule;
 
     RaycastHit hit;
-    public GameObject playArea;
+    //public GameObject playArea;
+
+    [Header("Stats")]
+    //public Image healthBarMeter;
+    public GameObject healthBarMeter;
+    public int maxHealth;
+    [SerializeField]
+    int currentHealth;
+
+    public GameObject deathEffect;
+    MeshRenderer meshRenderer;
+    public float invulnerabilityTime;
+    float invulnerabilityCountdown;
+    bool invulnerabilityActive = false;
 
     [Header("Weapon")]
     public int clipSize = 1;
     public GameObject laserShotPrefab;
     GameObject[] laserShots;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<CapsuleCollider>();
+        meshRenderer = GetComponent<MeshRenderer>();
+
+
         laserShots = new GameObject[clipSize];
 
         for (int i = 0; i < laserShots.Length; i++)
         {
             laserShots[i] = Instantiate(laserShotPrefab);
         }
+
+        currentHealth = maxHealth;
+        
+        SetPlayerUi();
         
     }
+
 
     void Update()
     {
@@ -50,6 +75,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
+
     }
 
     private void LateUpdate()
@@ -61,10 +87,26 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+
+        if (invulnerabilityActive)
+        {
+            meshRenderer.enabled = !meshRenderer.enabled;
+            invulnerabilityCountdown -= Time.deltaTime;
+            if (invulnerabilityCountdown <= 0)
+            {
+                playerCollider.enabled = true;
+                invulnerabilityActive = false;
+                meshRenderer.enabled = true;
+            }
+        }
+    }
+    private void SetPlayerUi()
+    {
+        healthBarMeter.GetComponent<RectTransform>().localScale = new Vector3(currentHealth, 1, 0);
     }
     private void Shoot()
     {
-        //fire laser
+        
         Debug.DrawRay(transform.position, transform.forward, Color.red, 100f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit))
@@ -105,5 +147,24 @@ public class PlayerController : MonoBehaviour
         
         //rb.AddForce(thrust);
     }
+
+    public void onHit(int damage)
+    {
+        currentHealth -= damage;
+        Instantiate (deathEffect, transform.position, Quaternion.identity);
+        SetPlayerUi();
+
+        if (currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+            //gameOver
+        }
+
+        invulnerabilityActive = true;
+        playerCollider.enabled = false;
+        invulnerabilityCountdown = invulnerabilityTime;
+
+    }
+
 
 }

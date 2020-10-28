@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 534172335954967317}
   - component: {fileID: 2345589947198558175}
   - component: {fileID: 5086655413866144234}
+  - component: {fileID: -9017692720747753717}
   m_Layer: 0
   m_Name: Coagulering
   m_TagString: Untagged
@@ -96,3 +97,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: 08d398a7c41b77f48882590a17084f27, type: 3}
+--- !u!114 &-9017692720747753717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291307919738203658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039bdd8bc23818345bfaa183c6642e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
