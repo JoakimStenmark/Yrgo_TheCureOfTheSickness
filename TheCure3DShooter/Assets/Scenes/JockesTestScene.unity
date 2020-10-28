@@ -485,18 +485,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 133880893, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 133880895, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3453233433538183843, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 3453233434985935776, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -545,34 +533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3453233434985935786, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 3453233434985935788, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
       propertyPath: playArea
       value: 
       objectReference: {fileID: 1070628077}
-    - target: {fileID: 3453233434985935789, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6891589408201964436, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7589895755876436767, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: distanceFromPlayer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7589895755876436767, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: rayMask.m_Bits
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 7589895755876436767, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
-      propertyPath: maxDistanceFromPlayer
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
 --- !u!1001 &1310868294
@@ -1081,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: enemySpawnFrequency
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: smoothSpeed

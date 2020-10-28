@@ -57,7 +57,13 @@ public class PlayerProjectile : MonoBehaviour
             {
                 Instantiate(onHitFX, transform.position, Quaternion.identity);
             }
-            
+
+            if (rayHit.collider.gameObject.CompareTag("Enemy"))
+            {
+                rayHit.collider.GetComponent<EnemyMovement>().OnHit(0);
+            }
+            Debug.Log(rayHit.collider.gameObject);
+
             gameObject.SetActive(false);
         }
         transform.position += transform.forward * speed * Time.fixedDeltaTime;

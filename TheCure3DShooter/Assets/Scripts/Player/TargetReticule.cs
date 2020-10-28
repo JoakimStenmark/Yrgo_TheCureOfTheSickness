@@ -33,7 +33,7 @@ public class TargetReticule : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 1000f,rayMask))
         {
             //TODO - no collision with player
-            Debug.Log(hit.collider.gameObject);
+            //Debug.Log(hit.collider.gameObject);
             reticleDepth = Mathf.Clamp(hit.distance, distanceFromPlayer, maxDistanceFromPlayer);            
         }
         else

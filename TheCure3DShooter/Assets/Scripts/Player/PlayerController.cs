@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
 
+        if (Input.GetButton("Fire3"))
+        {
+            //boost funktion
+        }
+
 
     }
 
