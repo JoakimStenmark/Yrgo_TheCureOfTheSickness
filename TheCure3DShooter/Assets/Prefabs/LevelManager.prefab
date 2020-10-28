@@ -44,8 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818de954326f8ce429c0f06ab2b16cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tunnelPart: {fileID: 0}
-  enemySpawner: {fileID: 0}
+  tunnelPart: {fileID: 8810966054987654336, guid: e5c8e3dfc535bc14c8bb26e7eae0d48c, type: 3}
+  lightPart: {fileID: 6235411391589032830, guid: 442e082c278cc7341a9ee7b594bf73e4, type: 3}
+  enemySpawner: {fileID: 8589306711635691670, guid: 7ccb9f12198d8d04a9dbdfd215242396, type: 3}
+  bloodCell: {fileID: 2910454311137321216, guid: 87378f8191f01f74ab61983fa0b955ae, type: 3}
+  enemyAnchorFollower: {fileID: 4022225757409441943, guid: 6e0946847174b2048a5ab49b82266215, type: 3}
+  spawnLights: 0
+  spawnEnemies: 0
+  spawnBloodcells: 0
   tunnelLength: 500
   pathPointStep: 5
   enemySpawnFrequency: 50
@@ -65,4 +71,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathList: []
-  smoothSpeed: 0
