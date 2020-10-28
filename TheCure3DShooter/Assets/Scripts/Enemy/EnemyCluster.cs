@@ -31,6 +31,12 @@ public class EnemyCluster : MonoBehaviour
 
     public GameObject railAnchor;
 
+
+    public void RandomizeSpawnAtLevel(int level)
+    {
+        print("Randomize" + level);
+    }
+
     // Start is called before the first sframe update
     void Start()
     {

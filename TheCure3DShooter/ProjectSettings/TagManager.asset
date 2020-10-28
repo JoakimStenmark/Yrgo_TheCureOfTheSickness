@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LevelManager
   - EnemyRailAnchor
+  - Enemy
   layers:
   - Default
   - TransparentFX
