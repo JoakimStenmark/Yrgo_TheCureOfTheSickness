@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
+    
+    public static LevelManager instance;
 
     List<GameObject> ObjectList = new List<GameObject>();
 
-    GameSettings gameSettings;
     PathManager pathManager;
 
     GameObject player;
 
+    [Header("Prefabs")]
     public GameObject tunnelPart;
+    [Space(10)]
     public GameObject lightPart;
     public GameObject enemySpawner;
     public GameObject bloodCell;
@@ -33,8 +36,15 @@ public class LevelManager : MonoBehaviour {
     public GameObject[] tunnelSegments;
 
     void Start() {
+
+        if( instance == null ) {
+
+            instance = this;
+        } else {
+
+            Destroy(this.gameObject);
+        }
         
-        gameSettings = GetComponent<GameSettings>();
         pathManager = GetComponent<PathManager>();
 
         player = GameObject.FindGameObjectWithTag( Tags.player );
@@ -74,7 +84,7 @@ public class LevelManager : MonoBehaviour {
 
                 if( spawnBloodcells ) {
 
-                    CreateNewObject(bloodCell, newPosition);
+                    CreateNewObject(bloodCell, newPosition, false);
                 }
             }
 
@@ -85,7 +95,7 @@ public class LevelManager : MonoBehaviour {
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
 
-                CreateNewObject(enemySpawner, newPosition).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
+                CreateNewObject(enemySpawner, newPosition, false).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
                 //AddObject( enemySpawner, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollower;
             }
 
@@ -97,20 +107,24 @@ public class LevelManager : MonoBehaviour {
 
         GameObject newObject;
 
-        newObject = CreateNewObject(pillarObject, position);
+        newObject = CreateNewObject(pillarObject, position, true);
 
         newObject.transform.Rotate(new Vector3(0, 0, Random.Range(0, 360)));
         newObject.transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
 
     }
 
-    GameObject CreateNewObject( GameObject objectToAdd, Vector3 position ) {
+    GameObject CreateNewObject( GameObject objectToAdd, Vector3 position, bool setAsChild ) {
 
         GameObject newObject;
 
         newObject = Instantiate( objectToAdd, position, Quaternion.identity );
+        ObjectList.Add(newObject);
 
-        ObjectList.Add( newObject );
+        if( setAsChild ) {
+
+            newObject.transform.parent = transform;
+        }
 
         return newObject;
     }

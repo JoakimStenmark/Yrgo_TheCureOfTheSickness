@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour {
 
-    GameSettings gameSettings;
-    GameObject gameController;
+    public static PathManager instance;
 
     [SerializeField]
     List<Path> pathList;
 
-    public void Start() {
+    void Start() {
 
-        gameController = GameObject.FindGameObjectWithTag( Tags.gameController );
-        gameSettings = gameController.GetComponent<GameSettings>();
+        if( instance == null ) {
+
+            instance = this;
+        } else {
+
+            Destroy(this.gameObject);
+        }
     }
 
     void OnDrawGizmos() {
@@ -24,7 +28,7 @@ public class PathManager : MonoBehaviour {
 
                 if( i > 0 ) {
 
-                    if( gameSettings.debug ) {
+                    if( GameManager.instance.debugActive ) {
 
                         Debug.DrawLine( path.pathPoint[ i - 1 ], path.pathPoint[ i ] );
                     }
