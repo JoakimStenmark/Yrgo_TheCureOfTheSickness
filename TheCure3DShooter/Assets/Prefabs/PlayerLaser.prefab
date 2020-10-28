@@ -128,7 +128,7 @@ MonoBehaviour:
   maxTimeAlive: 2
   rayMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   laser: 1
   homingMissile: 0
   speed: 1000
