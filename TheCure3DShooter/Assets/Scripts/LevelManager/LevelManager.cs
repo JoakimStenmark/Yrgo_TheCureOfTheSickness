@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject enemySpawner;
     public GameObject bloodCell;
     public GameObject enemyAnchorFollower;
+    public GameObject pillarObject;
 
     public bool spawnLights;
     public bool spawnEnemies;
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour {
     public int tunnelLength;
     public int pathPointStep = 5;
     public int enemySpawnFrequency = 50;
+    public int pillarFrequency = 30;
 
     public float xyOffset;
     public float zOffset;
@@ -72,13 +74,18 @@ public class LevelManager : MonoBehaviour {
 
                 if( spawnBloodcells ) {
 
-                    AddObject( bloodCell, newPosition );
+                    CreateNewObject(bloodCell, newPosition);
                 }
+            }
+
+            if( i % pillarFrequency == 0 ) {
+
+                SpawnPillars( newPosition );
             }
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
 
-                AddObject(enemySpawner, newPosition).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
+                CreateNewObject(enemySpawner, newPosition).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
                 //AddObject( enemySpawner, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollower;
             }
 
@@ -86,7 +93,18 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    GameObject AddObject( GameObject objectToAdd, Vector3 position ) {
+    void SpawnPillars( Vector3 position ) {
+
+        GameObject newObject;
+
+        newObject = CreateNewObject(pillarObject, position);
+
+        newObject.transform.Rotate(new Vector3(0, 0, Random.Range(0, 360)));
+        newObject.transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
+
+    }
+
+    GameObject CreateNewObject( GameObject objectToAdd, Vector3 position ) {
 
         GameObject newObject;
 

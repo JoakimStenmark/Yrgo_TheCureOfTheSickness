@@ -528,6 +528,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 133880894, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3453233434985935776, guid: 9f84e7434dedc5647a457d7e083865cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -713,6 +717,10 @@ PrefabInstance:
     - target: {fileID: 3453233434985935786, guid: ff7c7beb2288f4d4eb7af9e7f20b9045, type: 3}
       propertyPath: m_Name
       value: Player Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453233434985935787, guid: ff7c7beb2288f4d4eb7af9e7f20b9045, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3453233434985935789, guid: ff7c7beb2288f4d4eb7af9e7f20b9045, type: 3}
       propertyPath: m_Direction
@@ -1070,6 +1078,14 @@ PrefabInstance:
       propertyPath: enemyAnchorFollower
       value: 
       objectReference: {fileID: 3857840934695901069}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: pillarObject
+      value: 
+      objectReference: {fileID: 1362441708376843146, guid: ae942076934a215448a6eec62c39b72a, type: 3}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: xyOffset
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: smoothSpeed
       value: 8.5
