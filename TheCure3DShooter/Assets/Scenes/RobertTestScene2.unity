@@ -804,6 +804,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3453233434985935776, guid: ff7c7beb2288f4d4eb7af9e7f20b9045, type: 3}
   m_PrefabInstance: {fileID: 1520814008}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1902379257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3453233434985935786, guid: ff7c7beb2288f4d4eb7af9e7f20b9045, type: 3}
+  m_PrefabInstance: {fileID: 1520814008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1902379263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902379257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e022c00bdd92ab44bb4e22f099aca864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 2
 --- !u!1 &2095093920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1133,10 @@ PrefabInstance:
     - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: pillarFrequency
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: spawnBloodcells
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: smoothSpeed

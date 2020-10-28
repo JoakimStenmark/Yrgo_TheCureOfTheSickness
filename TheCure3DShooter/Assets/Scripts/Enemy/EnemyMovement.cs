@@ -36,6 +36,11 @@ public class EnemyMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        TestPlayerHP hp = collision.collider.GetComponent<TestPlayerHP>();
+        if(hp != null)
+        {
+            hp.RemoveHP();
+        }
         KillMe();
     }
 
