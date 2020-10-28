@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     public float moveForwardAt = 2;
     public float dropFrorwardAt = 5;
     public float moveSpeed = 5;
-    
+
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ra)
     {
         p = spawNumber;
@@ -27,14 +27,13 @@ public class EnemyMovement : MonoBehaviour
         KillMe();
     }
 
+    public void OnHit(int dmg)
+    {
+        KillMe();
+    }
     public void KillMe()
     {
         Destroy(gameObject);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
     }
 
     // Update is called once per frame
@@ -65,9 +64,10 @@ public class EnemyMovement : MonoBehaviour
     }
     void ForwardMovement()
     {
-        if(moveForwardAt < 0)
+        if (moveForwardAt < 0)
         {
-            if(dropFrorwardAt > 0) {
+            if (dropFrorwardAt > 0)
+            {
                 transform.parent = railAnchor.transform;
             }
             else
@@ -79,8 +79,4 @@ public class EnemyMovement : MonoBehaviour
         dropFrorwardAt -= Time.deltaTime;
     }
 
-    public void OnHit(int dmg)
-    {
-        Destroy(gameObject);
-    }
 }

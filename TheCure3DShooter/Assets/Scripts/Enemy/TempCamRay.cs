@@ -49,5 +49,9 @@ public class TempCamRay : MonoBehaviour
                 Instantiate(projectile, transform.position + ray.direction, Quaternion.LookRotation(ray.direction));
             }
         }
+        else
+        {
+
+        }
     }
 }
