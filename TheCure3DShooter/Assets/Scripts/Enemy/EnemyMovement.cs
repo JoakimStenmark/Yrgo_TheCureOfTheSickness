@@ -78,4 +78,9 @@ public class EnemyMovement : MonoBehaviour
         moveForwardAt -= Time.deltaTime;
         dropFrorwardAt -= Time.deltaTime;
     }
+
+    public void OnHit(int dmg)
+    {
+        Destroy(gameObject);
+    }
 }
