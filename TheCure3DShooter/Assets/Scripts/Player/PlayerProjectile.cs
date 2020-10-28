@@ -52,6 +52,7 @@ public class PlayerProjectile : MonoBehaviour
         RaycastHit rayHit;
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, speed * Time.fixedDeltaTime, rayMask))
         {
+
             if (onHitFX != null)
             {
                 Instantiate(onHitFX, transform.position, Quaternion.identity);
