@@ -33,16 +33,14 @@ public class EnemyCluster : MonoBehaviour
     public void RandomizeSpawnAtLevel(int level)
     {
         //offsetFromSorce = Random.insideUnitSphere * 2;
-        //spawnSegments = Random.Range(2, level);
-        //spawnSegments = Mathf.Clamp(spawnSegments, 2, 24);
-        //numberOfEnemys = Random.Range(1, spawnSegments);
-        //spawnRadius = Random.Range(numberOfEnemys, maxRadius);
-        /*
+        spawnSegments = Random.Range(2, level);
+        spawnSegments = Mathf.Clamp(spawnSegments, 2, 24);
+        numberOfEnemys = Random.Range(1, spawnSegments);
+        spawnRadius = Random.Range(numberOfEnemys, maxRadius);
         if (spawnRadius > maxRadius)
             spawnRadius = maxRadius;
 
         rotation = Random.rotation;
-        */
     }
 
     // Start is called before the first sframe update

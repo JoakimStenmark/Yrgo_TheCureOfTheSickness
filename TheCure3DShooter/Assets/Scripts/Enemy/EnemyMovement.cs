@@ -31,6 +31,8 @@ public class EnemyMovement : MonoBehaviour
         player = pl;
 
         transform.position = new Vector3(patrolPath[p].x, patrolPath[p].y, transform.position.z);
+
+        transform.forward = player.transform.position - transform.position;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -66,7 +68,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (homing)
         {
-            Vector3 dir = player.transform.position - transform.position;
+            Vector3 dir = player.transform.position + Vector3.forward * 5 - transform.position;
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), homingSpeed * Time.deltaTime);
             transform.forward = Vector3.RotateTowards(transform.forward, dir, homingSpeed * Time.deltaTime, 0);
         }

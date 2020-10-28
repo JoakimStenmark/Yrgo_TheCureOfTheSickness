@@ -49,9 +49,9 @@ MonoBehaviour:
   spawnAtDistance: 80
   numberOfEnemys: 1
   offsetFromSorce: {x: 0, y: 0, z: 0}
-  maxRadius: 1
+  maxRadius: 4
   spawnRadius: 3
-  spawnSegments: 8
+  spawnSegments: 24
   patrolPath: []
   rotation: {x: 0, y: 0, z: 0, w: 1}
   addTunnelMotion: {x: 0, y: 0, z: 7}
