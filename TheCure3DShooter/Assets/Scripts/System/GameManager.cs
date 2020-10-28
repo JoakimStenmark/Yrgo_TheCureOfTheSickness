@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿// ROBIN B
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void ChangeGameState( GameState newGameState ) {
+    public void ChangeGameState( GameState newGameState ) {
 
         if( currentGameState == newGameState ) {
 
@@ -80,7 +82,8 @@ public class GameManager : MonoBehaviour {
 
         if( newGameState == GameState.LoadLevel ) {
 
-            
+            SceneManager.LoadScene("RobinTestScene");
+
         }
 
         if( newGameState == GameState.GameLoop ) {
