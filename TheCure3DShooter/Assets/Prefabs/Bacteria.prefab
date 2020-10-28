@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fxOnDeath: {fileID: 415542339994477195, guid: 67b7a26e1449df04e9d063aa61e52c32, type: 3}
   moveForwardAt: 0
-  dropFrorwardAt: 1
-  moveSpeed: 5
+  dropFrorwardAt: 4
+  moveSpeed: 10
   homing: 1
   aimTime: 2
   killAt: 20

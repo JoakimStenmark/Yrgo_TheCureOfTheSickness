@@ -46,8 +46,8 @@ public class EnemyCluster : MonoBehaviour
     void Start()
     {
         //Get from levelmanger
-        if (randomized)
-            RandomizeSpawnAtLevel((int) (transform.position.z * 0.1));
+        //if (randomized)
+            //RandomizeSpawnAtLevel((int) (transform.position.z * 0.01));
 
         railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
         spawnAtDistance *= spawnAtDistance;
