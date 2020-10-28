@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour {
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
                 
-                AddObject( enemySpawner, newPosition );
+                AddObject( enemySpawner, newPosition ).RandomizeSpawnAtLevel(i);
                 //AddObject( enemySpawner, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollower;
             }
 
