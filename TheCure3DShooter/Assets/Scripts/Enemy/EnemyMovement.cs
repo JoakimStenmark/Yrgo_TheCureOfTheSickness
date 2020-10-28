@@ -12,7 +12,6 @@ public class EnemyMovement : MonoBehaviour
     [Header("Behavior")]
     public float moveForwardAt = 2;
     public float dropFrorwardAt = 5;
-    public float forwardSpeed = 5;
     public float moveSpeed = 5;
     
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ra)

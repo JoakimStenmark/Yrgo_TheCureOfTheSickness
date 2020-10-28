@@ -111,14 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df665a9382ffcb642a78580dc426f33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  railAnchor: {fileID: 0}
-  randomSpin: 1
-  RandomSpinTimeOne: 0.5
-  RandomSpinTimeTwo: 1
-  RandomSpinTimeTre: 1.25
-  moveForwardAt: 1
+  moveForwardAt: 0
   dropFrorwardAt: 10
-  forwardSpeed: 5
   moveSpeed: 5
-  forwardMoveDir: {x: 0, y: 0, z: 1}
-  forwardPos: {x: 0, y: 0, z: 1}
