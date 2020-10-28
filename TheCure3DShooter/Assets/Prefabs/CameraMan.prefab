@@ -139,7 +139,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 279
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   pathFrom: {x: 0, y: 0, z: 0}
   pathGoal: {x: 0, y: 0, z: 0}
   moveSpeed: 25
+  xySmoothSpeed: 0
 --- !u!81 &768405299507962295
 AudioListener:
   m_ObjectHideFlags: 0
