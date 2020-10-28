@@ -34,6 +34,7 @@ public class EnemyCluster : MonoBehaviour
     // Start is called before the first sframe update
     void Start()
     {
+        //Get from levelmanger
         railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
         spawnAtDistance *= spawnAtDistance;
         player = GameObject.FindGameObjectWithTag(Tags.player);
