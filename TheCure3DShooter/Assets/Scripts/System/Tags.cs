@@ -5,7 +5,7 @@ public class Tags : MonoBehaviour {
 
     public const string mainCamera = "MainCamera";
     public const string player = "Player";
-    public const string gameController = "GameController";
+    public const string gameManager = "GameManager";
 
     public const string levelManager = "LevelManager";
     public const string enemyRailAnchor = "EnemyRailAnchor";

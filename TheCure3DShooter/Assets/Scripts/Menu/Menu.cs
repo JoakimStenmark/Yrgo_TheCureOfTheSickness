@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// ROBIN B
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,11 @@ public class Menu : MonoBehaviour {
 
     public void StartGame() {
 
-        SceneManager.LoadScene ( "RobinTestScene" );
+        GameManager.instance.ChangeGameState(GameManager.GameState.LoadLevel);
+    }
+
+    public void QuitGame() {
+
+        Application.Quit();
     }
 }

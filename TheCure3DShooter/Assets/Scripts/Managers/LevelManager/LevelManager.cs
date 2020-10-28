@@ -1,22 +1,24 @@
-﻿using System.Collections;
+﻿// ROBIN B
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
+    
+    public static LevelManager instance;
 
     List<GameObject> ObjectList = new List<GameObject>();
 
-    GameSettings gameSettings;
-    PathManager pathManager;
-
     GameObject player;
 
+    [Header("Prefabs")]
     public GameObject tunnelPart;
-    public GameObject lightPart;
-    public GameObject enemySpawner;
-    public GameObject bloodCell;
-    public GameObject enemyAnchorFollower;
-    public GameObject pillarObject;
+    [Space(10)]
+    public GameObject spotLightPrefab;
+    public GameObject enemySpawnerPrefab;
+    public GameObject bloodCellPrefab;
+    public GameObject enemyAnchorFollowerPrefab;
+    public GameObject pillarPrefab;
 
     public bool spawnLights;
     public bool spawnEnemies;
@@ -33,9 +35,14 @@ public class LevelManager : MonoBehaviour {
     public GameObject[] tunnelSegments;
 
     void Start() {
-        
-        gameSettings = GetComponent<GameSettings>();
-        pathManager = GetComponent<PathManager>();
+
+        if( instance == null ) {
+
+            instance = this;
+        } else {
+
+            Destroy(this.gameObject);
+        }
 
         player = GameObject.FindGameObjectWithTag( Tags.player );
 
@@ -46,7 +53,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GenerateLevel() {
 
-        pathManager.NewPath( "TunnelPath" );
+        PathManager.instance.NewPath( "TunnelPath" );
 
         Vector3 lastPosition;
         lastPosition = Vector3.zero;
@@ -65,16 +72,16 @@ public class LevelManager : MonoBehaviour {
 
             if( i == 0 ) {
 
-                pathManager.AddPoint( "TunnelPath", newPosition );
+                PathManager.instance.AddPoint( "TunnelPath ", newPosition );
             }
 
             if( i % pathPointStep == 0 ) {
 
-                pathManager.AddPoint( "TunnelPath", newPosition );
+                PathManager.instance.AddPoint( "TunnelPath", newPosition );
 
                 if( spawnBloodcells ) {
 
-                    CreateNewObject(bloodCell, newPosition);
+                    CreateNewObject(bloodCellPrefab, newPosition, false);
                 }
             }
 
@@ -83,10 +90,10 @@ public class LevelManager : MonoBehaviour {
                 SpawnPillars( newPosition );
             }
 
-            if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
+            if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawnerPrefab != null && spawnEnemies ) {
 
-                CreateNewObject(enemySpawner, newPosition).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
-                //AddObject( enemySpawner, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollower;
+                CreateNewObject(enemySpawnerPrefab, newPosition, false).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
+                //AddObject( enemySpawnerPrefab, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollowerPrefab;
             }
 
             lastPosition = newPosition;
@@ -97,20 +104,24 @@ public class LevelManager : MonoBehaviour {
 
         GameObject newObject;
 
-        newObject = CreateNewObject(pillarObject, position);
+        newObject = CreateNewObject(pillarPrefab, position, true);
 
         newObject.transform.Rotate(new Vector3(0, 0, Random.Range(0, 360)));
         newObject.transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
 
     }
 
-    GameObject CreateNewObject( GameObject objectToAdd, Vector3 position ) {
+    GameObject CreateNewObject( GameObject objectToAdd, Vector3 position, bool setAsChild ) {
 
         GameObject newObject;
 
         newObject = Instantiate( objectToAdd, position, Quaternion.identity );
+        ObjectList.Add(newObject);
 
-        ObjectList.Add( newObject );
+        if( setAsChild ) {
+
+            newObject.transform.parent = transform;
+        }
 
         return newObject;
     }

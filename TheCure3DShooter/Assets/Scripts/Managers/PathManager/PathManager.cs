@@ -1,19 +1,24 @@
-﻿using System.Collections;
+﻿// ROBIN B
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PathManager : MonoBehaviour {
 
-    GameSettings gameSettings;
-    GameObject gameController;
+    public static PathManager instance;
 
     [SerializeField]
     List<Path> pathList;
 
-    public void Start() {
+    void Start() {
 
-        gameController = GameObject.FindGameObjectWithTag( Tags.gameController );
-        gameSettings = gameController.GetComponent<GameSettings>();
+        if( instance == null ) {
+
+            instance = this;
+        } else {
+
+            Destroy(this.gameObject);
+        }
     }
 
     void OnDrawGizmos() {
@@ -24,7 +29,7 @@ public class PathManager : MonoBehaviour {
 
                 if( i > 0 ) {
 
-                    if( gameSettings.debug ) {
+                    if( GameManager.instance.debugActive ) {
 
                         Debug.DrawLine( path.pathPoint[ i - 1 ], path.pathPoint[ i ] );
                     }
@@ -94,6 +99,13 @@ public class PathManager : MonoBehaviour {
         return returnValue;
     }
 
+    public void NewPath( string pathName ) {
+
+        Path newPath = new Path();
+        newPath.name = pathName;
+        pathList.Add( newPath );
+    }
+
     Path FindPath( string pathName ) {
 
         Path returnValue = null;
@@ -109,30 +121,42 @@ public class PathManager : MonoBehaviour {
         return returnValue;
     }
 
-    public void NewPath( string pathName ) {
-
-        Path newPath = new Path();
-        newPath.name = pathName;
-        pathList.Add( newPath );
-    }
-
     public void AddPoint( string pathName, Vector3 position ) {
 
-        Path tempPath = null;
+        Path path = FindPath( pathName );
 
-        foreach( Path path in pathList ) {
-
-            if( path.name == pathName ) {
-
-                tempPath = path;
-                tempPath.AddPoint( position );
-                break;
-            }
-        }
-
-        if( tempPath == null ) {
+        if( path == null ) {
 
             Debug.LogError( "No path with the name " + pathName + " found!" );
+            return;
         }
+
+        path.AddPoint( position );
+    }
+
+    public int GetPathLength( string pathName ) {
+
+        Path path = FindPath( pathName );
+
+        if( path == null ) {
+
+            Debug.LogError( "No path with the name " + pathName + " found!" );
+            return 0;
+        }
+
+        return path.pathPoint.Count;
+    }
+
+    public Vector3 GetPointPosition( string pathName, int index ) {
+
+        Path path = FindPath( pathName );
+
+        if( path == null ) {
+
+            Debug.LogError( "No path with the name " + pathName + " found!" );
+            return Vector3.zero;
+        }
+
+        return path.pathPoint[ index ];
     }
 }
