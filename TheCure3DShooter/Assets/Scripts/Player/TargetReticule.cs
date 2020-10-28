@@ -11,7 +11,7 @@ public class TargetReticule : MonoBehaviour
 
     private float distanceBetweenPlayerAndCamera;
     private GameObject player;
-    public float reticleDepth;
+    public float reticleDepth = 30;
 
     public LayerMask rayMask;
 
@@ -30,11 +30,15 @@ public class TargetReticule : MonoBehaviour
         distanceBetweenPlayerAndCamera = playerZPosition - cameraZPosition;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, rayMask))
+        if (Physics.Raycast(ray, out hit, 1000f,rayMask))
         {
             //TODO - no collision with player
             Debug.Log(hit.collider.gameObject);
             reticleDepth = Mathf.Clamp(hit.distance, distanceFromPlayer, maxDistanceFromPlayer);            
+        }
+        else
+        {
+            reticleDepth = maxDistanceFromPlayer;
         }
 
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, reticleDepth);
