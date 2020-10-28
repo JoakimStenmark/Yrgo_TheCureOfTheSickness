@@ -22,7 +22,7 @@ public class TunnelController : MonoBehaviour {
         gameSettings = GetComponent<GameSettings>();
 
         tunnelSegments = new GameObject[ tunnelLength ];
-        tunnelSegments[0] = tunnelPart;
+        tunnelSegments[ 0 ] = tunnelPart;
 
         GenerateMap();
     }
