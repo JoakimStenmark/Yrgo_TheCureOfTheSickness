@@ -127,7 +127,7 @@ public class PathManager : MonoBehaviour {
 
         if( path == null ) {
 
-            Debug.LogError( "No path with the name " + pathName + " found!" );
+            Debug.LogError( "ADD POINT : No path with the name " + pathName + " found!" );
             return;
         }
 
@@ -140,7 +140,7 @@ public class PathManager : MonoBehaviour {
 
         if( path == null ) {
 
-            Debug.LogError( "No path with the name " + pathName + " found!" );
+            Debug.LogError( "GET PATH LENGTH : No path with the name " + pathName + " found!" );
             return 0;
         }
 
@@ -153,7 +153,7 @@ public class PathManager : MonoBehaviour {
 
         if( path == null ) {
 
-            Debug.LogError( "No path with the name " + pathName + " found!" );
+            Debug.LogError( "GET POINT POSITION : No path with the name " + pathName + " found!" );
             return Vector3.zero;
         }
 

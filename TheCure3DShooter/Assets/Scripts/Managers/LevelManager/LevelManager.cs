@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour {
 
             if( i == 0 ) {
 
-                PathManager.instance.AddPoint( "TunnelPath ", newPosition );
+                PathManager.instance.AddPoint( "TunnelPath", newPosition );
             }
 
             if( i % pathPointStep == 0 ) {
