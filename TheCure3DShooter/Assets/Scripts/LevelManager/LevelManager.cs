@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject lightPart;
     public GameObject enemySpawner;
     public GameObject bloodCell;
+    public GameObject enemyAnchorFollower;
 
     public bool spawnLights;
     public bool spawnEnemies;
@@ -76,25 +77,23 @@ public class LevelManager : MonoBehaviour {
             }
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
-
-                AddObject( enemySpawner, newPosition );
-            }
-
-            if( Random.Range(0, 5) == 5 ) {
-
                 
+                AddObject( enemySpawner, newPosition );
+                //AddObject( enemySpawner, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollower;
             }
 
             lastPosition = newPosition;
         }
     }
 
-    void AddObject( GameObject objectToAdd, Vector3 position ) {
+    GameObject AddObject( GameObject objectToAdd, Vector3 position ) {
 
         GameObject newObject;
 
         newObject = Instantiate( objectToAdd, position, Quaternion.identity );
 
         ObjectList.Add( newObject );
+
+        return newObject;
     }
 }
