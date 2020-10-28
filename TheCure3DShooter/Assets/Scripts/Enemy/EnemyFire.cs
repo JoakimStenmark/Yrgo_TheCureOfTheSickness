@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyFire : MonoBehaviour
 {
+    public bool homing = true;
     public Transform target;
     public float fireRate = 2;
     private float nextShoot;
