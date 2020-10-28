@@ -22,8 +22,6 @@ public class TargetReticule : MonoBehaviour
 
         distanceBetweenPlayerAndCamera = playerZPosition - cameraZPosition;
 
-        Debug.Log(playerZPosition);
-
 
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceBetweenPlayerAndCamera + distanceFromPlayer);
         

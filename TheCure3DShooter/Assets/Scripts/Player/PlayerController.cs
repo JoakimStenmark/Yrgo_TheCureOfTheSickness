@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Transform targetingReticule;
 
     RaycastHit hit;
+    public GameObject playArea;
 
     [Header("Weapon")]
     public int clipSize = 1;
@@ -42,6 +43,13 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
         }
+
+
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + forwardSpeed * Time.deltaTime);
     }
 
 
@@ -83,10 +91,13 @@ public class PlayerController : MonoBehaviour
             movement.Normalize();
         }
 
-        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z + forwardSpeed));
-        Vector3 thrust = new Vector3(0, 0, forwardSpeed);
+        //rb.MovePosition(new Vector3(rb.position.x, rb.position.y, playArea.transform.position.z));
+        //float playAreaDiff = playArea.transform.position.z - transform.position.z;
+        //Vector3 thrust = new Vector3(0, 0, playAreaDiff);
+        //transform.position += thrust;
 
         rb.AddForce(movement * directionalSpeed);
+        
         //rb.AddForce(thrust);
     }
 

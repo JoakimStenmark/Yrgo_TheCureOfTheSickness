@@ -21,9 +21,9 @@ public class Path {
 
         for( int i = 0; i < pathPoint.Count; i++ ) {
 
-            if( currentPosition.z < pathPoint[i].z ) {
+            if( currentPosition.z < pathPoint[ i ].z ) {
                 
-                return pathPoint[i];
+                return pathPoint[ i ];
             }
         }
         

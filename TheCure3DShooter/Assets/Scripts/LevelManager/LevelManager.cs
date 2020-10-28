@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
 
     public void GenerateLevel() {
 
-        pathManager.NewPath("TunnelPath");
+        pathManager.NewPath( "TunnelPath" );
 
         Vector3 lastPosition;
         lastPosition = Vector3.zero;
@@ -52,32 +52,32 @@ public class LevelManager : MonoBehaviour {
 
             Vector3 newPosition = new Vector3(
 
-                Random.Range(lastPosition.x - xyOffset, lastPosition.x + xyOffset),
-                Random.Range(lastPosition.y - xyOffset, lastPosition.y + xyOffset),
+                Random.Range( lastPosition.x - xyOffset, lastPosition.x + xyOffset ),
+                Random.Range( lastPosition.y - xyOffset, lastPosition.y + xyOffset ),
                 i * zOffset
             );
 
-            tunnelSegments[ i ] = Instantiate(tunnelPart, newPosition, Quaternion.identity);
+            tunnelSegments[ i ] = Instantiate( tunnelPart, newPosition, Quaternion.identity );
             tunnelSegments[ i ].transform.parent = transform;
 
             if( i == 0 ) {
 
-                pathManager.AddPoint("TunnelPath", newPosition);
+                pathManager.AddPoint( "TunnelPath", newPosition );
             }
 
             if( i % pathPointStep == 0 ) {
 
-                pathManager.AddPoint("TunnelPath", newPosition);
+                pathManager.AddPoint( "TunnelPath", newPosition );
 
                 if( spawnBloodcells ) {
 
-                    AddObject(bloodCell, newPosition);
+                    AddObject( bloodCell, newPosition );
                 }
             }
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
 
-                AddObject(enemySpawner, newPosition);
+                AddObject( enemySpawner, newPosition );
             }
 
             if( Random.Range(0, 5) == 5 ) {
@@ -89,12 +89,12 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    void AddObject(GameObject objectToAdd, Vector3 position) {
+    void AddObject( GameObject objectToAdd, Vector3 position ) {
 
         GameObject newObject;
 
-        newObject = Instantiate(objectToAdd, position, Quaternion.identity);
+        newObject = Instantiate( objectToAdd, position, Quaternion.identity );
 
-        ObjectList.Add(newObject);
+        ObjectList.Add( newObject );
     }
 }
