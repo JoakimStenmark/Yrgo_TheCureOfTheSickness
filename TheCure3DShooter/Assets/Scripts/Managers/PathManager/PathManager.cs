@@ -99,6 +99,30 @@ public class PathManager : MonoBehaviour {
         return returnValue;
     }
 
+    public Vector3 FollowPathSmoothBetween( string pathName, Vector3 currentPosition, float smoothSpeed ) {
+
+        Vector3 returnValue = currentPosition;
+
+        Path path = FindPath( pathName );
+
+        if( path != null ) {
+
+            Vector3 pathGoal = path.CurrentPathGoal( currentPosition );
+            Vector3 pathLastGoal = path.LastPathGoal( currentPosition );
+
+            Vector2 xyTarget = new Vector2( pathGoal.x, pathGoal.y );
+            Vector2 xyCurrent = new Vector2( currentPosition.x, currentPosition.y );
+            Vector2 xyLastTarget = new Vector2( pathLastGoal.x, pathLastGoal.y );
+            float positionIndex = Mathf.InverseLerp( pathLastGoal.z, pathGoal.z, currentPosition.z );
+
+            Vector2 xyNewPosition = Vector2.Lerp( xyLastTarget, xyTarget, positionIndex );
+
+            returnValue = new Vector3( xyNewPosition.x, xyNewPosition.y, currentPosition.z );
+        }
+
+        return returnValue;
+    }
+
     public void NewPath( string pathName ) {
 
         Path newPath = new Path();
