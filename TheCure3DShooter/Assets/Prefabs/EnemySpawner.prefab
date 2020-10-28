@@ -43,14 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafd66b6c0cf1d34694f89287e13a8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moving: 0
   EnemyPreFab: {fileID: 3875154443888520671, guid: 3b8b565b59f0dd64da8a15a7b9b02394, type: 3}
-  spawnAtDistance: 80
+  randomized: 1
+  spawnAtDistance: 120
   numberOfEnemys: 8
+  offsetFromSorce: {x: 0, y: 0, z: 0}
+  maxRadius: 5
   spawnRadius: 3
   spawnSegments: 8
   patrolPath: []
-  spawnBoxPositionOffset: {x: -2.5, y: 2.5, z: 0}
-  spawnBoxWidh: 6
-  spawnSpaceing: 2
+  rotation: {x: 0, y: 0, z: 0, w: 1}
   addTunnelMotion: {x: 0, y: 0, z: 7}
   railAnchor: {fileID: 4022225757409441943, guid: 6e0946847174b2048a5ab49b82266215, type: 3}

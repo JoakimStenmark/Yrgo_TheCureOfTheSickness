@@ -7,23 +7,21 @@ using UnityEngine.PlayerLoop;
 public class EnemyCluster : MonoBehaviour
 {
     [Header("EnemyType")]
+    public bool moving = false;
     public GameObject EnemyPreFab;
 
     [Header("Settings")]
+    public bool randomized = true;
     public float spawnAtDistance = 10;
+    public int numberOfEnemys = 1;
+    public Vector3 offsetFromSorce = Vector3.zero;
 
-    public int numberOfEnemys;
-
-    [Header("SpawnPath")]
+    [Header("SpawnCluster")]
+    public float maxRadius = 10;
     public float spawnRadius = 10;
     public int spawnSegments = 24;
     public Vector2[] patrolPath;
-
-
-    public Vector3 spawnBoxPositionOffset = Vector3.zero;
-    public float spawnBoxWidh = 5;
-    public float spawnSpaceing = 1;
-
+    public Quaternion rotation = Quaternion.identity;
 
     [Header("TunnelMotion")]
     public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
@@ -34,13 +32,23 @@ public class EnemyCluster : MonoBehaviour
 
     public void RandomizeSpawnAtLevel(int level)
     {
-        print("Randomize" + level);
+        offsetFromSorce = Random.insideUnitSphere * 2;
+        spawnSegments = Random.Range(1, level);
+        numberOfEnemys = Random.Range(1, spawnSegments);
+        spawnRadius = Random.Range(numberOfEnemys, maxRadius);
+        if (spawnRadius > maxRadius)
+            spawnRadius = maxRadius;
+
+        rotation = Random.rotation;
     }
 
     // Start is called before the first sframe update
     void Start()
     {
         //Get from levelmanger
+        //if (randomized)
+            //RandomizeSpawnAtLevel((int) (transform.position.z * 0.01));
+
         railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
         spawnAtDistance *= spawnAtDistance;
         player = GameObject.FindGameObjectWithTag(Tags.player);
@@ -50,47 +58,23 @@ public class EnemyCluster : MonoBehaviour
     {
         if ((transform.position - player.transform.position).sqrMagnitude < spawnAtDistance)
         {
-            SpawEnemysInBox();
+            SpawEnemys();
             DestroySpawer();
         }
     }
-    public void SpawEnemysInBox()
+    public void SpawEnemys()
     {
-        float x = 0;
-        float y = 0;
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            GameObject spawedEnemy = Instantiate(EnemyPreFab, transform.position, Quaternion.identity);
+            GameObject spawedEnemy = Instantiate(EnemyPreFab, transform.position + offsetFromSorce, rotation);
 
             //TODO: fix this nice
             //Spawn is of coded type
             EnemyMovement enemyMoveScript = spawedEnemy.GetComponent<EnemyMovement>();
             if (enemyMoveScript != null)
             {
-                enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor);
+                enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
             }
-
-
-            ForceMoveEnemy fme = spawedEnemy.GetComponent<ForceMoveEnemy>();
-            //Spaw is of Physics type
-            if (fme != null)
-            {
-                if (x > spawnBoxWidh)
-                {
-                    y -= spawnSpaceing;
-                    x = 0;
-                }
-
-                spawedEnemy.transform.position = transform.position + spawnBoxPositionOffset + new Vector3(x, y, 0);
-                fme.addTunnelMovement = addTunnelMotion;
-                fme.destroyAtDistance = spawnAtDistance + spawnAtDistance;
-                x += spawnSpaceing;
-
-                Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, Color.yellow, 2);
-                Debug.DrawLine(transform.position + spawnBoxPositionOffset, transform.position + spawnBoxPositionOffset + transform.up * y, Color.yellow, 2);
-                Debug.DrawLine(transform.position + spawnBoxPositionOffset + transform.right * spawnBoxWidh, transform.position + spawnBoxPositionOffset+ transform.right * spawnBoxWidh + transform.up * y, Color.yellow, 2);
-            }
-
         }
     }
     Vector2[] CircularPath()
