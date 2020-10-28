@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour {
     public static PathManager instance;
 
     [SerializeField]
-    List<Path> pathList;
+    List<Path> pathList = new List<Path>();
 
     void Start() {
 
