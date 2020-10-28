@@ -8,4 +8,5 @@ public class Tags : MonoBehaviour {
     public const string gameController = "GameController";
 
     public const string levelManager = "LevelManager";
+    public const string enemyRailAnchor = "EnemyRailAnchor";
 }

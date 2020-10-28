@@ -16,6 +16,10 @@ public class LevelManager : MonoBehaviour {
     public GameObject enemySpawner;
     public GameObject bloodCell;
 
+    public bool spawnLights;
+    public bool spawnEnemies;
+    public bool spawnBloodcells;
+
     public int tunnelLength;
     public int pathPointStep = 5;
     public int enemySpawnFrequency = 50;
@@ -64,10 +68,14 @@ public class LevelManager : MonoBehaviour {
             if( i % pathPointStep == 0 ) {
 
                 pathManager.AddPoint("TunnelPath", newPosition);
-                AddObject(bloodCell, newPosition);
+
+                if( spawnBloodcells ) {
+
+                    AddObject(bloodCell, newPosition);
+                }
             }
 
-            if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null) {
+            if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawner != null && spawnEnemies ) {
 
                 AddObject(enemySpawner, newPosition);
             }

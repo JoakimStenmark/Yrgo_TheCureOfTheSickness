@@ -23,6 +23,9 @@ public class EnemyCluster : MonoBehaviour
     private GameObject[] spawedEnemys;
     private bool birth = false;
     private GameObject player;
+
+    public GameObject railAnchor;
+
     // Start is called before the first sframe update
     void Start()
     {
