@@ -1,4 +1,5 @@
-﻿Shader "Custom/RimLight"
+﻿//Robert S
+Shader "Custom/RimLight"
 {
     Properties
     {

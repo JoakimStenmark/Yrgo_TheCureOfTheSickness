@@ -52,4 +52,5 @@ MonoBehaviour:
   spawnAtDistance: 120
   numberOfEnemys: 1
   offsetFromSorce: {x: 0, y: 0, z: 0}
-  maxRadius: 4
+  maxRadius: 3
+  startP: 0

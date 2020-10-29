@@ -1,7 +1,5 @@
 ﻿//Robert S
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+//When time use Rigidbody move position
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -25,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public bool homing = true;
     private bool chase;
     public float chaseSpeed = 10;
+    public float chaseAccMul = 10;
 
     public float aimTime = 2;
     private float homingAngularSpeed = 2;
@@ -96,7 +95,7 @@ public class EnemyMovement : MonoBehaviour
 
     void HomingOnPlayer()
     {
-        moveSpeed = Mathf.MoveTowards(moveSpeed, chaseSpeed, 4 * Time.deltaTime);
+        moveSpeed = Mathf.MoveTowards(moveSpeed, chaseSpeed, chaseAccMul * Time.deltaTime);
 
         if (homing)
         {
