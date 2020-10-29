@@ -129,9 +129,9 @@ MonoBehaviour:
   hp: 1
   dmg: 1
   fxOnDeath: {fileID: 5916237426389447102, guid: c8a67a35bb824804f8636445cf5dbdd5, type: 3}
-  moveForwardAt: 2
-  dropFrorwardAt: 8
-  moveSpeed: 10
+  moveForwardAt: 4.5
+  dropFrorwardAt: 15
+  moveSpeed: 3
   homing: 1
   aimTime: 2
   homingTargetOffsett: {x: 0, y: 0, z: 5}
