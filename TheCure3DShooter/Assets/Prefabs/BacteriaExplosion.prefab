@@ -4927,3 +4927,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0a3eed43cd199ff4692f306e66cb8f3c, type: 3}
   - {fileID: 8300000, guid: 2b164bd5cf80db644ad166064522de1d, type: 3}
   - {fileID: 8300000, guid: 3701f99f36718214aac3445a5153be02, type: 3}
+  playOnStart: 1

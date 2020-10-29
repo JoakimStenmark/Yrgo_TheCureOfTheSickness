@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public int maxHealth;
     [SerializeField]
     int currentHealth;
+    //public AudioClip damageSound;
+
 
     public GameObject deathEffect;
     MeshRenderer meshRenderer;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     public int clipSize = 1;
     public GameObject laserShotPrefab;
     GameObject[] laserShots;
-    AudioSource weaponSound;
+    AudioSource audioSource;
     
     public AudioClip[] weaponSounds;
 
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<CapsuleCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
-        weaponSound = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
        
         laserShots = new GameObject[clipSize];
 
@@ -77,6 +79,18 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (invulnerabilityActive)
+        {
+            
+            invulnerabilityCountdown -= Time.deltaTime;
+            if (invulnerabilityCountdown <= 0)
+            {
+                playerCollider.enabled = true;
+                invulnerabilityActive = false;
+                meshRenderer.enabled = true;
+            }
+        }
+
     }
 
     private void LateUpdate()
@@ -92,11 +106,10 @@ public class PlayerController : MonoBehaviour
         if (invulnerabilityActive)
         {
             meshRenderer.enabled = !meshRenderer.enabled;
-            invulnerabilityCountdown -= Time.deltaTime;
+
             if (invulnerabilityCountdown <= 0)
             {
-                playerCollider.enabled = true;
-                invulnerabilityActive = false;
+
                 meshRenderer.enabled = true;
             }
         }
@@ -114,19 +127,19 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("hit a " + hit.collider.gameObject.name);
         }
+        int clipNumber = UnityEngine.Random.Range(0, weaponSounds.Length);
+        audioSource.clip = weaponSounds[clipNumber];
+        audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.1f);
 
         foreach (GameObject laserShot in laserShots)
         {
             if (!laserShot.activeSelf)
             {
                 laserShot.SetActive(true);
+                audioSource.Play();
                 break;
             }
         }
-        int clipNumber = UnityEngine.Random.Range(0, weaponSounds.Length);
-        weaponSound.clip = weaponSounds[clipNumber];
-        weaponSound.pitch = UnityEngine.Random.Range(0.8f, 1.1f);
-        weaponSound.Play();
     }
 
     void Movement()
@@ -148,20 +161,26 @@ public class PlayerController : MonoBehaviour
 
     public void onHit(int damage)
     {
-        currentHealth -= damage;
-        Instantiate (deathEffect, transform.position, Quaternion.identity);
-        SetPlayerUi();
-
-        if (currentHealth <= 0)
+        if (damage > 0)
         {
-            gameObject.SetActive(false);
-            GameManager.instance.ChangeGameState(GameManager.GameState.GameOver);
+            currentHealth -= damage;
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+            SetPlayerUi();
+            
+            //audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            //audioSource.clip = damageSound;
+            //audioSource.Play();
+
+            if (currentHealth <= 0)
+            {
+                gameObject.SetActive(false);
+                GameManager.instance.ChangeGameState(GameManager.GameState.GameOver);
+            }
+
+            invulnerabilityActive = true;
+            playerCollider.enabled = false;
+            invulnerabilityCountdown = invulnerabilityTime;
         }
-
-        invulnerabilityActive = true;
-        playerCollider.enabled = false;
-        invulnerabilityCountdown = invulnerabilityTime;
-
     }
 
 

@@ -6,6 +6,7 @@ public class SoundEffectPlaylist : MonoBehaviour
 {
     public AudioClip[] audioClips;
     private AudioSource soundPlayer;
+    public bool playOnStart;
     void Start()
     {
         soundPlayer = GetComponent<AudioSource>();
@@ -13,10 +14,24 @@ public class SoundEffectPlaylist : MonoBehaviour
         int clipNumber = Random.Range(0, audioClips.Length);
         soundPlayer.clip = audioClips[clipNumber];
         soundPlayer.pitch = Random.Range(0.8f, 1.1f);
-        soundPlayer.Play();
-        Debug.Log("Play?");
+
+        if (playOnStart)
+        {
+
+            PlayRandomFromClips();
+
+        }
 
     }
-        
+
+    public void PlayRandomFromClips()
+    {
+        int clipNumber = Random.Range(0, audioClips.Length);
+        soundPlayer.clip = audioClips[clipNumber];
+        soundPlayer.pitch = Random.Range(0.8f, 1.1f);
+        soundPlayer.Play();
+        //Debug.Log("Play?");
+    }
+
 
 }

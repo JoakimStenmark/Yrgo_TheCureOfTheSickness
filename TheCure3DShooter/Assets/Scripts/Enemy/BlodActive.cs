@@ -33,4 +33,12 @@ public class BlodActive : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {            
+            GetComponent<SoundEffectPlaylist>().PlayRandomFromClips();
+        }
+    }
 }

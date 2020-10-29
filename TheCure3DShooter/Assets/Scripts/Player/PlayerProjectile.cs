@@ -60,7 +60,9 @@ public class PlayerProjectile : MonoBehaviour
             {
                 rayHit.collider.GetComponent<EnemyMovement>().OnHit(damage);
             }
-            Debug.Log(rayHit.collider.gameObject);
+
+
+            //Debug.Log(rayHit.collider.gameObject);
 
             gameObject.SetActive(false);
         }
