@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour {
     
     public static LevelManager instance;
 
-    List<GameObject> ObjectList = new List<GameObject>();
+    //List<GameObject> ObjectList = new List<GameObject>();
 
     GameObject player;
 
@@ -16,13 +16,11 @@ public class LevelManager : MonoBehaviour {
     [Space(10)]
     public GameObject spotLightPrefab;
     public GameObject enemySpawnerPrefab;
-    public GameObject bloodCellPrefab;
     public GameObject enemyAnchorFollowerPrefab;
-    public GameObject pillarPrefab;
+    public GameObject goalTriggerPrefab;
 
     public bool spawnLights;
     public bool spawnEnemies;
-    public bool spawnBloodcells;
 
     public int tunnelLength;
     public int pathPointStep = 5;
@@ -49,6 +47,8 @@ public class LevelManager : MonoBehaviour {
         tunnelSegments = new GameObject[ tunnelLength ];
 
         GenerateLevel();
+
+        GameManager.instance.ChangeGameState( GameManager.GameState.GameLoop );
     }
 
     public void GenerateLevel() {
@@ -78,16 +78,6 @@ public class LevelManager : MonoBehaviour {
             if( i % pathPointStep == 0 ) {
 
                 PathManager.instance.AddPoint( "TunnelPath", newPosition );
-
-                if( spawnBloodcells ) {
-
-                    CreateNewObject(bloodCellPrefab, newPosition, false);
-                }
-            }
-
-            if( i % pillarFrequency == 0 ) {
-
-                SpawnPillars( newPosition );
             }
 
             if( i % enemySpawnFrequency == 0 && i != 0 && enemySpawnerPrefab != null && spawnEnemies ) {
@@ -96,26 +86,21 @@ public class LevelManager : MonoBehaviour {
                 //AddObject( enemySpawnerPrefab, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollowerPrefab;
             }
 
+            if( i == tunnelLength - 1 ) {
+
+                CreateNewObject( goalTriggerPrefab, newPosition, true );
+            }
+
             lastPosition = newPosition;
         }
-    }
-
-    void SpawnPillars( Vector3 position ) {
-
-        GameObject newObject;
-
-        newObject = CreateNewObject(pillarPrefab, position, true);
-
-        newObject.transform.Rotate(new Vector3(0, 0, Random.Range(0, 360)));
-        newObject.transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
     }
 
     GameObject CreateNewObject( GameObject objectToAdd, Vector3 position, bool setAsChild ) {
 
         GameObject newObject;
 
-        newObject = Instantiate( objectToAdd, position, Quaternion.identity );
-        ObjectList.Add(newObject);
+        newObject = Instantiate(objectToAdd, position, Quaternion.identity);
+        //ObjectList.Add(newObject);
 
         if( setAsChild ) {
 

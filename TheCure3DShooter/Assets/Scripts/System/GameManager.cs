@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
         Menu,
         LoadLevel,
+        LevelLoaded,
         GameLoop,
         PauseGame,
         GameOver,
@@ -49,6 +50,10 @@ public class GameManager : MonoBehaviour {
                 break;
 
             case GameState.LoadLevel:
+
+                break;
+
+            case GameState.LevelLoaded:
 
                 break;
 
@@ -90,6 +95,11 @@ public class GameManager : MonoBehaviour {
             SceneManager.LoadScene("GameLevel");
         }
 
+        if( newGameState == GameState.LevelLoaded ) {
+
+
+        }
+
         if( newGameState == GameState.GameLoop ) {
 
 
@@ -105,8 +115,7 @@ public class GameManager : MonoBehaviour {
            
         }
 
-        if (newGameState == GameState.Victory)
-        {
+        if (newGameState == GameState.Victory) {
 
 
         }
