@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Joakim
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,15 +36,17 @@ public class PlayerController : MonoBehaviour
     public int clipSize = 1;
     public GameObject laserShotPrefab;
     GameObject[] laserShots;
-
+    AudioSource weaponSound;
+    
+    public AudioClip[] weaponSounds;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<CapsuleCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
-
-
+        weaponSound = GetComponent<AudioSource>();
+       
         laserShots = new GameObject[clipSize];
 
         for (int i = 0; i < laserShots.Length; i++)
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         
         SetPlayerUi();
-        
+      
     }
 
 
@@ -120,7 +123,10 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-
+        int clipNumber = UnityEngine.Random.Range(0, weaponSounds.Length);
+        weaponSound.clip = weaponSounds[clipNumber];
+        weaponSound.pitch = UnityEngine.Random.Range(0.8f, 1.1f);
+        weaponSound.Play();
     }
 
     void Movement()
@@ -136,14 +142,8 @@ public class PlayerController : MonoBehaviour
             movement.Normalize();
         }
 
-        //rb.MovePosition(new Vector3(rb.position.x, rb.position.y, playArea.transform.position.z));
-        //float playAreaDiff = playArea.transform.position.z - transform.position.z;
-        //Vector3 thrust = new Vector3(0, 0, playAreaDiff);
-        //transform.position += thrust;
-
         rb.AddForce(movement * directionalSpeed);
-        
-        //rb.AddForce(thrust);
+      
     }
 
     public void onHit(int damage)
