@@ -38,16 +38,19 @@ public class EnemyCluster : MonoBehaviour
 
     public void RandomizeSpawnAtLevel(int level)
     {
-        int r = (int) Random.Range(0, 2);
+        int r = (int) Random.Range(-0.9f, 2);
+        //r = 1;
         if(r == 0)
         {
             SpawnType = EnemyPreFab;
-
-
-            //offsetFromSorce = Random.insideUnitSphere * 2;
-            spawnSegments = Random.Range(2, 24);
-            spawnSegments = Mathf.Clamp(spawnSegments, 2, 24);
+            
+            spawnSegments = Random.Range(2, 4);
             numberOfEnemys = Random.Range(1, spawnSegments);
+            if(spawnSegments > 3)
+            {
+                spawnSegments = 24;
+            }
+
             spawnRadius = Random.Range(numberOfEnemys, maxRadius);
             if (spawnRadius > maxRadius)
                 spawnRadius = maxRadius;
@@ -59,16 +62,14 @@ public class EnemyCluster : MonoBehaviour
             SpawnType = PillarPreFab;
 
             numberOfEnemys = Random.Range(1, Random.Range(1, 3));
+            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
             rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
-            offsetFromSorce = Random.insideUnitSphere * Random.Range(1, 3);
+            offsetFromSorce = rotation * Vector3.right * Random.Range(2,maxRadius * 2);
         }
         else
         {
             SpawnType = BloodCellPreFab;
         }
-
-        
-
     }
 
     // Start is called before the first sframe update
@@ -92,7 +93,9 @@ public class EnemyCluster : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemys; i++)
         {
-
+            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
+            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
+            offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
             GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
 
             //TODO: fix this nice
@@ -101,7 +104,10 @@ public class EnemyCluster : MonoBehaviour
             if (enemyMoveScript != null)
             {
                 enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
-                return;
+            }
+            else
+            {
+                
             }
         }
     }
