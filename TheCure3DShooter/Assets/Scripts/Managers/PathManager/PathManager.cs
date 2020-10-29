@@ -108,16 +108,13 @@ public class PathManager : MonoBehaviour {
         if( path != null ) {
 
             Vector3 pathGoal = path.CurrentPathGoal( currentPosition );
-            Vector3 pathLastGoal = path.LastPathGoal( currentPosition );
+            Vector3 lastGoal = path.LastPathGoal ( currentPosition );
 
-            Vector2 xyTarget = new Vector2( pathGoal.x, pathGoal.y );
-            Vector2 xyCurrent = new Vector2( currentPosition.x, currentPosition.y );
-            Vector2 xyLastTarget = new Vector2( pathLastGoal.x, pathLastGoal.y );
-            float positionIndex = Mathf.InverseLerp( pathLastGoal.z, pathGoal.z, currentPosition.z );
+            float positionIndex = Mathf.InverseLerp(lastGoal.z, pathGoal.z, currentPosition.z);
 
-            Vector2 xyNewPosition = Vector2.Lerp( xyLastTarget, xyTarget, positionIndex );
+            Vector3 newPostion = Vector3.Slerp(lastGoal, pathGoal, positionIndex);
 
-            returnValue = new Vector3( xyNewPosition.x, xyNewPosition.y, currentPosition.z );
+            returnValue = new Vector3( newPostion.x, newPostion.y, currentPosition.z );
         }
 
         return returnValue;
