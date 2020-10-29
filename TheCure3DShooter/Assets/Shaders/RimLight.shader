@@ -30,6 +30,7 @@
             float2 uv_MainTex;
             float2 uv_BumpMap;
             float3 viewDir;
+            float3 normal;
         };
 
         half _Glossiness;
@@ -49,13 +50,13 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) + _Color;
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
-            o.Normal = tex2D(_BumpMap, IN.uv_MainTex);
+            o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_MainTex));
             half rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
             o.Emission = _RimColor.rgb * pow(rim, _RimStr);
         }
