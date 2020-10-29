@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     [SerializeField]
-    GameObject player;
+    GameObject followObject;
 
     [SerializeField]
     Vector3 pathFrom;
@@ -19,8 +19,9 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate() {
 
-        Vector3 pathPosition = PathManager.instance.FollowPathSmooth( "TunnelPath", transform.position, xySmoothSpeed );
+        Vector3 pathPosition = PathManager.instance.FollowPathSmoothBetween( "TunnelPath", transform.position, xySmoothSpeed );
 
         transform.position = new Vector3( pathPosition.x, pathPosition.y, transform.position.z + moveSpeed * Time.deltaTime );
+        transform.LookAt( followObject.transform.position );
     }
 }

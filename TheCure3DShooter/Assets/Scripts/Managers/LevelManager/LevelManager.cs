@@ -108,7 +108,6 @@ public class LevelManager : MonoBehaviour {
 
         newObject.transform.Rotate(new Vector3(0, 0, Random.Range(0, 360)));
         newObject.transform.Rotate(new Vector3(0, Random.Range(0, 360), 0));
-
     }
 
     GameObject CreateNewObject( GameObject objectToAdd, Vector3 position, bool setAsChild ) {

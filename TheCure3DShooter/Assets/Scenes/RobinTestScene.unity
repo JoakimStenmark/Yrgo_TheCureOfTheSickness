@@ -308,9 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048d46c2b408e2a429712e31dd81376b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathManager: {fileID: 0}
-  smoothValue: 0.9
-  moveSpeed: 25
 --- !u!4 &595201504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5effe1744a956c4888b3328cceb8e09, type: 3}
@@ -1171,6 +1168,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 476728382248255465, guid: 541aaa8c74e8e504ab9ec2b79a6d2243, type: 3}
+      propertyPath: debugActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3139267833920438969, guid: 541aaa8c74e8e504ab9ec2b79a6d2243, type: 3}
       propertyPath: tunnelSegments.Array.size
       value: 1

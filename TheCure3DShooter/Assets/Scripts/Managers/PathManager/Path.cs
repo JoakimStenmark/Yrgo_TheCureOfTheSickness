@@ -30,5 +30,20 @@ public class Path {
         
         return returnValue;    
     }
+
+    public Vector3 LastPathGoal( Vector3 currentPosition ) {
+
+        Vector3 returnValue = currentPosition;
+
+        for( int i = pathPoint.Count -1; i < 0; i-- ) {
+
+            if( currentPosition.z > pathPoint[ i ].z ) {
+
+                return pathPoint[ i ];
+            }
+        }
+
+        return returnValue;
+    }
 }
 
