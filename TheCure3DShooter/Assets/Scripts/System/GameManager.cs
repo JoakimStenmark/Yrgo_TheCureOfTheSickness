@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
-    
+    public Canvas MenuCanvas;
+
     public enum GameState {
 
         Menu,
