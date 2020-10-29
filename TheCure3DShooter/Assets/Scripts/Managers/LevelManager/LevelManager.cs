@@ -104,8 +104,7 @@ public class LevelManager : MonoBehaviour {
 
         GameObject newObject;
 
-        newObject = Instantiate(objectToAdd, position, Quaternion.identity);
-        //ObjectList.Add(newObject);
+        newObject = Instantiate( objectToAdd, position, Quaternion.identity );
 
         if( setAsChild ) {
 
