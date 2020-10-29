@@ -47,12 +47,10 @@ MonoBehaviour:
   tunnelPart: {fileID: 8810966054987654336, guid: e5c8e3dfc535bc14c8bb26e7eae0d48c, type: 3}
   spotLightPrefab: {fileID: 6235411391589032830, guid: 442e082c278cc7341a9ee7b594bf73e4, type: 3}
   enemySpawnerPrefab: {fileID: 8589306711635691670, guid: 7ccb9f12198d8d04a9dbdfd215242396, type: 3}
-  bloodCellPrefab: {fileID: 2910454311137321216, guid: 87378f8191f01f74ab61983fa0b955ae, type: 3}
   enemyAnchorFollowerPrefab: {fileID: 4022225757409441943, guid: 6e0946847174b2048a5ab49b82266215, type: 3}
-  pillarPrefab: {fileID: 1362441708376843146, guid: ae942076934a215448a6eec62c39b72a, type: 3}
+  goalTriggerPrefab: {fileID: 7972083478342436689, guid: 8df3bcdef30c5214983a396521d45f89, type: 3}
   spawnLights: 0
   spawnEnemies: 0
-  spawnBloodcells: 0
   tunnelLength: 500
   pathPointStep: 5
   enemySpawnFrequency: 50
