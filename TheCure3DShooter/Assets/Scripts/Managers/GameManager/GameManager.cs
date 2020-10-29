@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour {
 
         if( newGameState == GameState.Menu ) {
 
+            SceneManager.LoadScene( "Menu" );
             Cursor.visible = true;
         }
 
