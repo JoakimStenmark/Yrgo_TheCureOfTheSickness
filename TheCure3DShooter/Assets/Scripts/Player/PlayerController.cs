@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             gameObject.SetActive(false);
-            //gameOver
+            GameManager.instance.ChangeGameState(GameManager.GameState.GameOver);
         }
 
         invulnerabilityActive = true;

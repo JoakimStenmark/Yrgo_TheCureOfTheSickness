@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour {
         LoadLevel,
         GameLoop,
         PauseGame,
-        GameOver
+        GameOver,
+        Victory
     }
     [Header("GameState")]
     public GameState currentGameState;
@@ -63,6 +64,10 @@ public class GameManager : MonoBehaviour {
 
                 break;
 
+            case GameState.Victory:
+
+                break;
+
             default:
                 break;
         }
@@ -96,6 +101,12 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.GameOver ) {
+
+           
+        }
+
+        if (newGameState == GameState.Victory)
+        {
 
 
         }
