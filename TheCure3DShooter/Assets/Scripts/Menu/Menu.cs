@@ -15,4 +15,9 @@ public class Menu : MonoBehaviour {
 
         Application.Quit();
     }
+
+    public void MainMenu() {
+
+        GameManager.instance.ChangeGameState( GameManager.GameState.Menu );
+    }
 }
