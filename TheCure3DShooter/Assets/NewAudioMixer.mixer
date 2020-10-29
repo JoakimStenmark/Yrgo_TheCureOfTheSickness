@@ -65,9 +65,10 @@ AudioMixerController:
   m_AudioMixerGroupViews:
   - guids:
     - 744c53210419b1645bf5f1768acd6862
-    - e2c351fe346957547b4556feaedfbec4
     - acdc521e6723ad94db8b8127fc79eed4
+    - e2c351fe346957547b4556feaedfbec4
     - c05c8d19375b694478ddbb7a51532426
+    - e09e79af6cb3fc24485db6c8676d5821
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -84,6 +85,7 @@ AudioMixerGroupController:
   - {fileID: 8949921109053795641}
   - {fileID: 767004353147563906}
   - {fileID: 1687640753614891476}
+  - {fileID: 5018576990921738308}
   m_Volume: dacee2477d4157146a498923ceb8d05f
   m_Pitch: 82ea5ed7f77b3b04387a2d3b788086e8
   m_Send: 00000000000000000000000000000000
@@ -117,6 +119,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 59cd6276a14c6844c89369fec5fd79e6
   m_FloatValues:
+    fda59b61dba4609499eccb65aaeda71e: 0
     52f1e613bbc03364289247c0fe4812dd: 1326
     516b992325e0e7b468e0b31278179a91: 253.23055
     4e779105689f2c940b8be2aa6a8319ac: 1
@@ -130,6 +133,7 @@ AudioMixerSnapshotController:
     0868c18a8be295c48ada6061242c6084: 87
     fe9166daef20e8e43a62eefc17fd0612: 2.64
     a849f41b58f136245a3ee98bfbf5c653: 11475.948
+    ede9dcac4dc0e474f8caf536042a87e9: -46.207085
     7c7429be1b2dcf5428e76d3642fa652c: -1528
     712414afc20aed3429faca08f2e97372: 87
     7c7be0ffce4561443933732c453a28d3: 2526
@@ -234,6 +238,39 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &3546407097371040895
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0e744f8bb75af934b8a251ca8a608ebb
+  m_EffectName: Attenuation
+  m_MixLevel: 9810db96b32b3b4499dc1b2a70d126dd
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &5018576990921738308
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FireWorks
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: e09e79af6cb3fc24485db6c8676d5821
+  m_Children: []
+  m_Volume: ede9dcac4dc0e474f8caf536042a87e9
+  m_Pitch: 6127f77557a8a0a48a8391a8d3ee1ac6
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 3546407097371040895}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &8125371985318338445
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
