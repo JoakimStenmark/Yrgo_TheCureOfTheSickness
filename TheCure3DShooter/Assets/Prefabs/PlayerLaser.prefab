@@ -132,4 +132,5 @@ MonoBehaviour:
   laser: 1
   homingMissile: 0
   speed: 300
+  damage: 1
   onHitFX: {fileID: 415542339994477195, guid: 22d34de675036974db6f994d9e4d19bb, type: 3}

@@ -14,13 +14,13 @@ public class PlayerProjectile : MonoBehaviour
 
     public float speed = 10;
 
+    public int damage;
+
     [Header("FX")]
     public GameObject onHitFX;
 
     private void OnEnable()
-    {
-         
-        
+    {      
         //Transform playerTransform = GetComponentInParent<Transform>();
         Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -41,8 +41,6 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (laser)
             LaserBeam();
-
-
     }
 
     private void LaserBeam()
@@ -60,7 +58,7 @@ public class PlayerProjectile : MonoBehaviour
 
             if (rayHit.collider.gameObject.CompareTag("Enemy"))
             {
-                rayHit.collider.GetComponent<EnemyMovement>().OnHit(0);
+                rayHit.collider.GetComponent<EnemyMovement>().OnHit(damage);
             }
             Debug.Log(rayHit.collider.gameObject);
 

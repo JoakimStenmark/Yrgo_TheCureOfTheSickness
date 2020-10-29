@@ -18,10 +18,8 @@ public class PlayerController : MonoBehaviour
     public Transform targetingReticule;
 
     RaycastHit hit;
-    //public GameObject playArea;
 
     [Header("Stats")]
-    //public Image healthBarMeter;
     public GameObject healthBarMeter;
     public int maxHealth;
     [SerializeField]
@@ -74,8 +72,6 @@ public class PlayerController : MonoBehaviour
             //boost funktion
         }
 
-
-
     }
 
     private void LateUpdate()
@@ -107,7 +103,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         
-        Debug.DrawRay(transform.position, transform.forward, Color.red, 100f);
+        Debug.DrawRay(transform.position, transform.forward * 20f, Color.red, 10f);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
