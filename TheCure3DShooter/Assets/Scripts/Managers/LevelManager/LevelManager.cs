@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour {
                 }
             }
 
-            if( i == tunnelLength - 1 ) {
+            if( i == tunnelLength - 5 ) {
 
                 CreateNewObject( goalTriggerPrefab, newPosition, true );
             }

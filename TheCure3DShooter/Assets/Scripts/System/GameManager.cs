@@ -87,15 +87,14 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.Menu ) {
-
-
+            
+            
         }
 
         if( newGameState == GameState.LoadLevel ) {
 
-            SceneManager.LoadScene("GameLevel");
-            menuCanvas.gameObject.SetActive(false);
-
+            SceneManager.LoadScene( "GameLevel" );
+            menuCanvas.gameObject.SetActive( false );
         }
 
         if ( newGameState == GameState.LevelLoaded ) {
@@ -114,13 +113,13 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.GameOver ) {
-            menuCanvas.gameObject.SetActive(true);
-           
+
+            menuCanvas.gameObject.SetActive( true );
         }
 
         if (newGameState == GameState.Victory) {
 
-
+            SceneManager.LoadScene("WinnerLevel");
         }
 
         currentGameState = newGameState;
