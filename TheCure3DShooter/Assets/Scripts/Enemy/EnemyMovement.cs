@@ -27,10 +27,13 @@ public class EnemyMovement : MonoBehaviour
     public Vector3 homingTargetOffsett = Vector3.forward * 5;
     public float killAt = 20;
 
-    private Vector3 velocity;
+    private Transform visual;
 
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ranchor, GameObject pl)
     {
+        visual = transform.GetChild(0);
+        visual.parent = null;
+
         p = spawNumber;
         patrolPath = path;
         railAnchor = ranchor;
@@ -60,6 +63,7 @@ public class EnemyMovement : MonoBehaviour
     private void KillMe()
     {
         Instantiate(fxOnDeath, transform.position, transform.rotation);
+        Destroy(visual.gameObject);
         Destroy(gameObject);
     }
 
@@ -75,6 +79,13 @@ public class EnemyMovement : MonoBehaviour
             ForwardMovement();
             Patrol();
         }
+
+        VisualObject();
+    }
+
+    void VisualObject()
+    {
+        visual.position = transform.position;
     }
 
     void HomingOnPlayer()
