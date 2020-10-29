@@ -87,12 +87,13 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.Menu ) {
-            
-            
+
+            Cursor.visible = true;
         }
 
         if( newGameState == GameState.LoadLevel ) {
 
+            Cursor.visible = false;
             SceneManager.LoadScene( "GameLevel" );
             menuCanvas.gameObject.SetActive( false );
         }
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour {
 
         if( newGameState == GameState.GameOver ) {
 
+            Cursor.visible = true;
             menuCanvas.gameObject.SetActive( true );
         }
 
