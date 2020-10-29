@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public int hp = 1;
     private GameObject player;
     private GameObject railAnchor;
     private Vector2[] patrolPath;
@@ -18,9 +19,10 @@ public class EnemyMovement : MonoBehaviour
     public float dropFrorwardAt = 5;
     public float moveSpeed = 10;
     public bool homing = true;
+    private bool chase;
     public float aimTime = 2;
-    private bool chase = false;
     private float homingSpeed = 2;
+    public Vector3 homingTargetOffsett = Vector3.forward * 5;
     public float killAt = 20;
 
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ranchor, GameObject pl)
@@ -36,19 +38,22 @@ public class EnemyMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        TestPlayerHP hp = collision.collider.GetComponent<TestPlayerHP>();
-        if(hp != null)
+        PlayerController hp = collision.collider.GetComponent<PlayerController>();
+        
+        if (hp != null)
         {
-            hp.RemoveHP();
+            hp.onHit(1);
         }
         KillMe();
     }
 
     public void OnHit(int dmg)
     {
-        KillMe();
+        hp--;
+        if(hp <= 0)
+            KillMe();
     }
-    public void KillMe()
+    private void KillMe()
     {
         Instantiate(fxOnDeath, transform.position, transform.rotation);
         Destroy(gameObject);
@@ -70,11 +75,9 @@ public class EnemyMovement : MonoBehaviour
 
     void HomingOnPlayer()
     {
-
         if (homing)
         {
-            Vector3 dir = player.transform.position + Vector3.forward * 5 - transform.position;
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), homingSpeed * Time.deltaTime);
+            Vector3 dir = player.transform.position + homingTargetOffsett - transform.position;
             transform.forward = Vector3.RotateTowards(transform.forward, dir, homingSpeed * Time.deltaTime, 0);
         }
         else
@@ -137,5 +140,4 @@ public class EnemyMovement : MonoBehaviour
         moveForwardAt -= Time.deltaTime;
         dropFrorwardAt -= Time.deltaTime;
     }
-
 }
