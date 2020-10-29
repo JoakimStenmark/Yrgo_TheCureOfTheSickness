@@ -11,6 +11,7 @@ public class EnemyCluster : MonoBehaviour
     [Header("EnemyType")]
     public bool moving = false;
     private GameObject SpawnType;
+    private int spawnNumber;
     public GameObject EnemyPreFab;
     public GameObject PillarPreFab;
     public GameObject BloodCellPreFab;
@@ -24,27 +25,35 @@ public class EnemyCluster : MonoBehaviour
 
     [Header("SpawnCluster")]
     public float maxRadius = 10;
-    public float spawnRadius = 10;
-    public int spawnSegments = 24;
-    public Vector2[] patrolPath;
-    public Quaternion rotation = Quaternion.identity;
+    private float spawnRadius = 10;
+    private int spawnSegments = 24;
+    private Vector2[] patrolPath;
+    private Quaternion rotation = Quaternion.identity;
 
     [Header("TunnelMotion")]
-    public Vector3 addTunnelMotion = Vector3.forward * 0.5f;
     private GameObject player;
+    private GameObject railAnchor;
 
-    public GameObject railAnchor;
+    // Start is called before the first sframe update
+    void Start()
+    {
+        if(randomized)
+            RandomizeSpawnAtLevel(0);
 
-
+        railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
+        spawnAtDistance *= spawnAtDistance;
+        player = GameObject.FindGameObjectWithTag(Tags.player);
+    }
     public void RandomizeSpawnAtLevel(int level)
     {
-        int r = (int) Random.Range(-0.9f, 2);
-        //r = 1;
-        if(r == 0)
+        spawnNumber = (int) Random.Range(-0.9f, 2);
+        //spawnNumber = 1;
+        //Enemy
+        if(spawnNumber == 0)
         {
             SpawnType = EnemyPreFab;
             
-            spawnSegments = Random.Range(2, 4);
+            spawnSegments = Random.Range(2, 6);
             numberOfEnemys = Random.Range(1, spawnSegments);
             if(spawnSegments > 3)
             {
@@ -56,12 +65,12 @@ public class EnemyCluster : MonoBehaviour
                 spawnRadius = maxRadius;
 
             rotation = Random.rotation;
-        }
-        else if(r == 1)
+        }//Pillar
+        else if(spawnNumber == 1)
         {
             SpawnType = PillarPreFab;
 
-            numberOfEnemys = Random.Range(1, Random.Range(1, 3));
+            numberOfEnemys = Random.Range(1, 3);
             rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
             rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
             offsetFromSorce = rotation * Vector3.right * Random.Range(2,maxRadius * 2);
@@ -72,14 +81,7 @@ public class EnemyCluster : MonoBehaviour
         }
     }
 
-    // Start is called before the first sframe update
-    void Start()
-    {
-        RandomizeSpawnAtLevel(0);
-        railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
-        spawnAtDistance *= spawnAtDistance;
-        player = GameObject.FindGameObjectWithTag(Tags.player);
-    }
+   
     // Update is called once per frame
     void Update()
     {
@@ -93,11 +95,14 @@ public class EnemyCluster : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
-            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
-            offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
-            GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
-
+            if (spawnNumber == 1)
+            {
+                rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
+                rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
+                offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
+                offsetFromSorce.z = i;
+            }
+                GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
             //TODO: fix this nice
             //Spawn is of coded type
             EnemyMovement enemyMoveScript = spawedEnemy.GetComponent<EnemyMovement>();
