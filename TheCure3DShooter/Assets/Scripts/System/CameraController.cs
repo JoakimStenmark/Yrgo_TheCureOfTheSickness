@@ -19,6 +19,11 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate() {
 
+        if( GameManager.instance.currentGameState != GameManager.GameState.GameLoop ) {
+
+            return;
+        }
+
         Vector3 pathPosition = PathManager.instance.FollowPathSmooth("TunnelPath", transform.position, xySmoothSpeed);
 
         transform.position = new Vector3( pathPosition.x, pathPosition.y, transform.position.z + moveSpeed * Time.deltaTime );
