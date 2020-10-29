@@ -8,25 +8,42 @@ public class GameOver : MonoBehaviour
 
     public GameObject gameOverBackground;
     private Image backgroundImage;
-    
+    public GameObject GameOverText;
+
     float currentAlpha = 0;
     public float fadeinSpeed;
     private Color tempColor;
 
-    void Start()
+    private void OnEnable()
     {
         backgroundImage = gameOverBackground.GetComponent<Image>();
+        currentAlpha = 0;
         tempColor = new Color(0, 0, 0, currentAlpha);
+        backgroundImage.color = tempColor;
+        GameOverText.gameObject.SetActive(false);
+
     }
+
 
     void Update()
     {
-        if (currentAlpha < 255)
+        //Debug.Log(currentAlpha);
+        if (currentAlpha < 1)
         {
-            currentAlpha += fadeinSpeed * Time.deltaTime;
-            tempColor.a = currentAlpha;
+            FadeInBackGround();
+        }
+        else
+        {
+            GameOverText.gameObject.SetActive(true);
         }
 
+
+    }
+
+    void FadeInBackGround()
+    {
+        currentAlpha += fadeinSpeed * Time.deltaTime;
+        tempColor.a = currentAlpha;
         backgroundImage.color = tempColor;
     }
 }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
-    public Canvas MenuCanvas;
+    public Canvas menuCanvas;
 
     public enum GameState {
 
@@ -94,9 +94,11 @@ public class GameManager : MonoBehaviour {
         if( newGameState == GameState.LoadLevel ) {
 
             SceneManager.LoadScene("GameLevel");
+            menuCanvas.gameObject.SetActive(false);
+
         }
 
-        if( newGameState == GameState.LevelLoaded ) {
+        if ( newGameState == GameState.LevelLoaded ) {
 
 
         }
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.GameOver ) {
-
+            menuCanvas.gameObject.SetActive(true);
            
         }
 

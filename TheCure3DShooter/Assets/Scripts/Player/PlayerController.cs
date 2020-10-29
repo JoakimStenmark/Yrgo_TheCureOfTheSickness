@@ -67,9 +67,11 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButton("Fire3") && GameManager.instance.debugActive)
         {
             //boost funktion
+            onHit(4);
+
         }
 
     }
@@ -107,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            Debug.Log("hit a " + hit.collider.gameObject.name);
+            //Debug.Log("hit a " + hit.collider.gameObject.name);
         }
 
         foreach (GameObject laserShot in laserShots)
