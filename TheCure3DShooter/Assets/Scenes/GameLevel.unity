@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.33
       objectReference: {fileID: 0}
+    - target: {fileID: 2613250100216207783, guid: 473821f75c530c84aa2b9d38ec1854c4, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.14901961
+      objectReference: {fileID: 0}
     - target: {fileID: 2613250100290727081, guid: 473821f75c530c84aa2b9d38ec1854c4, type: 3}
       propertyPath: m_Name
       value: PlayArea
