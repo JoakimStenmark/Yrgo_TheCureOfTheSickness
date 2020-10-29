@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moving: 0
   EnemyPreFab: {fileID: 3875154443888520671, guid: 3b8b565b59f0dd64da8a15a7b9b02394, type: 3}
+  PillarPreFab: {fileID: 4291307919738203658, guid: ab140c4ead6279745b12a59535f82728, type: 3}
+  BloodCellPreFab: {fileID: 2910454311137321216, guid: 87378f8191f01f74ab61983fa0b955ae, type: 3}
   randomized: 0
   spawnAtDistance: 80
   numberOfEnemys: 1

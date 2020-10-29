@@ -1084,6 +1084,10 @@ PrefabInstance:
       propertyPath: xyOffset
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: pillarPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871997, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: smoothSpeed
       value: 8.5
