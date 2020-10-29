@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour {
     public int tunnelLength;
     public int pathPointStep = 5;
     public int enemySpawnFrequency = 50;
-    public int pillarFrequency = 30;
+    public int spawnFrequencyModifier = 10;
 
     public float xyOffset;
     public float zOffset;
@@ -84,6 +84,11 @@ public class LevelManager : MonoBehaviour {
 
                 CreateNewObject(enemySpawnerPrefab, newPosition, false).GetComponent<EnemyCluster>().RandomizeSpawnAtLevel(i);
                 //AddObject( enemySpawnerPrefab, newPosition ).GetComponent<EnemyCluster>().railAnchor = enemyAnchorFollowerPrefab;
+
+                if( enemySpawnFrequency > 1 && i % spawnFrequencyModifier == 0 ) {
+
+                    enemySpawnFrequency--;
+                }
             }
 
             if( i == tunnelLength - 1 ) {
