@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [Header("Propetys")]
     public int hp = 1;
+    public int dmg = 1;
     private GameObject player;
     private GameObject railAnchor;
     private Vector2[] patrolPath;

@@ -6,9 +6,15 @@ using UnityEngine.PlayerLoop;
 
 public class EnemyCluster : MonoBehaviour
 {
+    public int level;
+
     [Header("EnemyType")]
     public bool moving = false;
+    private GameObject SpawnType;
     public GameObject EnemyPreFab;
+    public GameObject PillarPreFab;
+    public GameObject BloodCellPreFab;
+
 
     [Header("Settings")]
     public bool randomized = true;
@@ -32,24 +38,43 @@ public class EnemyCluster : MonoBehaviour
 
     public void RandomizeSpawnAtLevel(int level)
     {
-        //offsetFromSorce = Random.insideUnitSphere * 2;
-        spawnSegments = Random.Range(2, level);
-        spawnSegments = Mathf.Clamp(spawnSegments, 2, 24);
-        numberOfEnemys = Random.Range(1, spawnSegments);
-        spawnRadius = Random.Range(numberOfEnemys, maxRadius);
-        if (spawnRadius > maxRadius)
-            spawnRadius = maxRadius;
+        int r = (int) Random.Range(0, 2);
+        if(r == 0)
+        {
+            SpawnType = EnemyPreFab;
 
-        rotation = Random.rotation;
+
+            //offsetFromSorce = Random.insideUnitSphere * 2;
+            spawnSegments = Random.Range(2, 24);
+            spawnSegments = Mathf.Clamp(spawnSegments, 2, 24);
+            numberOfEnemys = Random.Range(1, spawnSegments);
+            spawnRadius = Random.Range(numberOfEnemys, maxRadius);
+            if (spawnRadius > maxRadius)
+                spawnRadius = maxRadius;
+
+            rotation = Random.rotation;
+        }
+        else if(r == 1)
+        {
+            SpawnType = PillarPreFab;
+
+            numberOfEnemys = Random.Range(1, Random.Range(1, 3));
+            rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
+            offsetFromSorce = Random.insideUnitSphere * Random.Range(1, 3);
+        }
+        else
+        {
+            SpawnType = BloodCellPreFab;
+        }
+
+        
+
     }
 
     // Start is called before the first sframe update
     void Start()
     {
-        //Get from levelmanger
-        //if (randomized)
-            //RandomizeSpawnAtLevel((int) (transform.position.z * 0.01));
-
+        RandomizeSpawnAtLevel(0);
         railAnchor = GameObject.FindGameObjectWithTag(Tags.enemyRailAnchor);
         spawnAtDistance *= spawnAtDistance;
         player = GameObject.FindGameObjectWithTag(Tags.player);
@@ -67,7 +92,8 @@ public class EnemyCluster : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            GameObject spawedEnemy = Instantiate(EnemyPreFab, transform.position + offsetFromSorce, rotation);
+
+            GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
 
             //TODO: fix this nice
             //Spawn is of coded type
@@ -75,6 +101,7 @@ public class EnemyCluster : MonoBehaviour
             if (enemyMoveScript != null)
             {
                 enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
+                return;
             }
         }
     }
