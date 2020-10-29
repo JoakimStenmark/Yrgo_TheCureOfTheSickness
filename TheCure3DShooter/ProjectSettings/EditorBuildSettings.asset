@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 17975bb4009360d46a06486bea640db5
   - enabled: 1
-    path: Assets/Scenes/RobinTestScene.unity
-    guid: cb2989c345f933c49b8824eb14547799
+    path: Assets/Scenes/GameLevel.unity
+    guid: 2048241ce27126d4fb723e71f57e39e7
   m_configObjects: {}
