@@ -28,6 +28,7 @@ public class EnemyCluster : MonoBehaviour
     private float spawnRadius = 10;
     private int spawnSegments = 24;
     private Vector2[] patrolPath;
+    public int startP;
     private Quaternion rotation = Quaternion.identity;
 
     [Header("TunnelMotion")]
@@ -47,18 +48,20 @@ public class EnemyCluster : MonoBehaviour
     public void RandomizeSpawnAtLevel(int level)
     {
         spawnNumber = (int) Random.Range(-0.9f, 3);
-        //spawnNumber = 5;
+        //spawnNumber = 0;
         //Enemy
         if(spawnNumber == 0)
         {
             SpawnType = EnemyPreFab;
-            
+
             spawnSegments = Random.Range(2, 6);
             numberOfEnemys = Random.Range(1, spawnSegments);
             if(spawnSegments > 3)
             {
                 spawnSegments = 24;
             }
+
+            startP = Mathf.RoundToInt(spawnSegments / numberOfEnemys);
 
             spawnRadius = Random.Range(numberOfEnemys, maxRadius);
             if (spawnRadius > maxRadius)
@@ -110,7 +113,7 @@ public class EnemyCluster : MonoBehaviour
                 //Spawn is of coded type
                 if (enemyMoveScript != null)
                 {
-                    enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
+                    enemyMoveScript.SpawnInit(i*startP, CircularPath(), railAnchor, player);
                     //Move to correct pos
                 }
             }

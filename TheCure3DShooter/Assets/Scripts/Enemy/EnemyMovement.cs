@@ -1,6 +1,7 @@
 ﻿//Robert S
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -19,11 +20,15 @@ public class EnemyMovement : MonoBehaviour
     [Header("Behavior")]
     public float moveForwardAt = 2;
     public float dropFrorwardAt = 5;
-    public float moveSpeed = 10;
+    public float patrolSpeed = 3;
+    private float moveSpeed = 10;
     public bool homing = true;
     private bool chase;
+    public float chaseSpeed = 10;
+
     public float aimTime = 2;
-    private float homingSpeed = 2;
+    private float homingAngularSpeed = 2;
+
     public Vector3 homingTargetOffsett = Vector3.forward * 5;
     public float killAt = 20;
 
@@ -34,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
         visual = transform.GetChild(0);
         visual.parent = null;
 
+        moveSpeed = patrolSpeed;
         p = spawNumber;
         patrolPath = path;
         railAnchor = ranchor;
@@ -90,10 +96,12 @@ public class EnemyMovement : MonoBehaviour
 
     void HomingOnPlayer()
     {
+        moveSpeed = Mathf.MoveTowards(moveSpeed, chaseSpeed, 4 * Time.deltaTime);
+
         if (homing)
         {
             Vector3 dir = player.transform.position + homingTargetOffsett - transform.position;
-            transform.forward = Vector3.RotateTowards(transform.forward, dir, homingSpeed * Time.deltaTime, 0);
+            transform.forward = Vector3.RotateTowards(transform.forward, dir, homingAngularSpeed * Time.deltaTime, 0);
         }
         else
         {

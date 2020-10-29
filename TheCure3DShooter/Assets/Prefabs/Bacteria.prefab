@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3875154443888520671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4934103300597054730}
   m_Father: {fileID: 0}
@@ -87,12 +87,13 @@ MonoBehaviour:
   hp: 1
   dmg: 1
   fxOnDeath: {fileID: 5916237426389447102, guid: c8a67a35bb824804f8636445cf5dbdd5, type: 3}
-  moveForwardAt: 4.5
+  moveForwardAt: 3
   dropFrorwardAt: 15
-  moveSpeed: 3
+  patrolSpeed: 3
   homing: 1
+  chaseSpeed: 10
   aimTime: 2
-  homingTargetOffsett: {x: 0, y: 0, z: 5}
+  homingTargetOffsett: {x: 0, y: 0, z: 10}
   killAt: 20
 --- !u!114 &4896483385829140545
 MonoBehaviour:
