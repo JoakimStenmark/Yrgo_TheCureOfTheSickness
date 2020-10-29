@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1a33990a393b043abf95d975d56375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  followObject: {fileID: 2927895063953012582, guid: 1d3f4851e74d59f4f87a7e66a8efa92c, type: 3}
   pathFrom: {x: 0, y: 0, z: 0}
   pathGoal: {x: 0, y: 0, z: 0}
   moveSpeed: 25
