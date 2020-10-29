@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour {
     [SerializeField]
     Vector3 pathGoal;
 
+    public bool doFollow;
+
     public float moveSpeed;
     public float xySmoothSpeed;
 
@@ -24,9 +26,12 @@ public class CameraController : MonoBehaviour {
             return;
         }
 
-        Vector3 pathPosition = PathManager.instance.FollowPathSmooth("TunnelPath", transform.position, xySmoothSpeed);
+        if( doFollow ) {
 
-        transform.position = new Vector3( pathPosition.x, pathPosition.y, transform.position.z + moveSpeed * Time.deltaTime );
-        transform.LookAt( followObject.transform.position );
+            Vector3 pathPosition = PathManager.instance.FollowPathSmooth("TunnelPath", transform.position, xySmoothSpeed);
+
+            transform.position = new Vector3(pathPosition.x, pathPosition.y, transform.position.z + moveSpeed * Time.deltaTime);
+            transform.LookAt(followObject.transform.position);
+        }
     }
 }
