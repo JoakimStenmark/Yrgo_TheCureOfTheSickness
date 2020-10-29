@@ -27,6 +27,8 @@ public class EnemyMovement : MonoBehaviour
     public Vector3 homingTargetOffsett = Vector3.forward * 5;
     public float killAt = 20;
 
+    private Vector3 velocity;
+
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ranchor, GameObject pl)
     {
         p = spawNumber;
@@ -119,7 +121,9 @@ public class EnemyMovement : MonoBehaviour
                     p = 0;
                 }
             }
-            transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+            Vector3 newPosition = new Vector3(newPos.x, newPos.y, transform.position.z);
+            transform.forward = newPosition - transform.position;
+            transform.position = newPosition;// new Vector3(newPos.x, newPos.y, transform.position.z);
         }
     }
     void ForwardMovement()
