@@ -46,8 +46,8 @@ public class EnemyCluster : MonoBehaviour
     }
     public void RandomizeSpawnAtLevel(int level)
     {
-        spawnNumber = (int) Random.Range(-0.9f, 2);
-        //spawnNumber = 1;
+        spawnNumber = (int) Random.Range(-0.9f, 3);
+        //spawnNumber = 5;
         //Enemy
         if(spawnNumber == 0)
         {
@@ -75,9 +75,15 @@ public class EnemyCluster : MonoBehaviour
             rotation = Quaternion.AngleAxis(Random.Range(0,360), Vector3.forward);
             offsetFromSorce = rotation * Vector3.right * Random.Range(2,maxRadius * 2);
         }
+        //BlodCell
         else
         {
             SpawnType = BloodCellPreFab;
+
+            numberOfEnemys = Random.Range(5, 6);
+            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
+            rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
+            offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
         }
     }
 
@@ -95,25 +101,39 @@ public class EnemyCluster : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemys; i++)
         {
-            if (spawnNumber == 1)
+            //Enemy Bacteria
+             if(spawnNumber == 0)
+            {
+                GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
+                EnemyMovement enemyMoveScript = spawedEnemy.GetComponent<EnemyMovement>();
+                //TODO: fix this nice
+                //Spawn is of coded type
+                if (enemyMoveScript != null)
+                {
+                    enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
+                    //Move to correct pos
+                }
+            }
+            else if(spawnNumber == 1)
             {
                 rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
                 rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
                 offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
                 offsetFromSorce.z = i;
-            }
                 GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
-            //TODO: fix this nice
-            //Spawn is of coded type
-            EnemyMovement enemyMoveScript = spawedEnemy.GetComponent<EnemyMovement>();
-            if (enemyMoveScript != null)
-            {
-                enemyMoveScript.SpawnInit(i, CircularPath(), railAnchor, player);
             }
             else
             {
-                
+                rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up);
+                rotation = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.forward);
+                offsetFromSorce = rotation * Vector3.right * Random.Range(2, maxRadius * 2);
+                offsetFromSorce.z = i;
+                GameObject spawedEnemy = Instantiate(SpawnType, transform.position + offsetFromSorce, rotation);
+                spawedEnemy.GetComponent<Rigidbody>().velocity = Random.insideUnitSphere;
+                spawedEnemy.GetComponent<Rigidbody>().rotation = (Random.rotation);
+                spawedEnemy.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere * 5);
             }
+           
         }
     }
     Vector2[] CircularPath()
