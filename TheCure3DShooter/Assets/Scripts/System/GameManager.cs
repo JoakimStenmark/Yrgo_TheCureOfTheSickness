@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
         if( newGameState == GameState.LoadLevel ) {
 
-            SceneManager.LoadScene("RobinTestScene");
+            SceneManager.LoadScene("GameLevel");
         }
 
         if( newGameState == GameState.GameLoop ) {
