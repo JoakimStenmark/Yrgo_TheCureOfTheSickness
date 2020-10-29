@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 08d398a7c41b77f48882590a17084f27, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0459467ce9a348946ab2baf466b1ef41, type: 2}
     - target: {fileID: 919132149155446097, guid: 08d398a7c41b77f48882590a17084f27, type: 3}
       propertyPath: m_Name
       value: Coagulering
