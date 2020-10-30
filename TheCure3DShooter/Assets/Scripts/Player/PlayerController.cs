@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             invulnerabilityCountdown -= Time.deltaTime;
             if (invulnerabilityCountdown <= 0)
             {
-                playerCollider.enabled = true;
+                //playerCollider.enabled = true;
                 invulnerabilityActive = false;
                 meshRenderer.enabled = true;
             }
