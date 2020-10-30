@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             invulnerabilityCountdown -= Time.deltaTime;
             if (invulnerabilityCountdown <= 0)
             {
-                playerCollider.enabled = true;
+                //playerCollider.enabled = true;
                 invulnerabilityActive = false;
                 meshRenderer.enabled = true;
             }
@@ -163,10 +163,12 @@ public class PlayerController : MonoBehaviour
     {
         if (damage > 0)
         {
-            currentHealth -= damage;
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-            SetPlayerUi();
-            
+            if (!invulnerabilityActive)
+            {
+                currentHealth -= damage;
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
+                SetPlayerUi();
+            }
             //audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             //audioSource.clip = damageSound;
             //audioSource.Play();
@@ -178,7 +180,7 @@ public class PlayerController : MonoBehaviour
             }
 
             invulnerabilityActive = true;
-            playerCollider.enabled = false;
+            //playerCollider.enabled = false;
             invulnerabilityCountdown = invulnerabilityTime;
         }
     }
