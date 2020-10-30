@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour {
     public float xyOffset;
     public float zOffset;
 
+    public bool skipStateChange;
+
     public GameObject[] tunnelSegments;
 
     void Start() {
@@ -46,7 +48,7 @@ public class LevelManager : MonoBehaviour {
 
         GenerateLevel();
 
-        if( GameManager.instance.GetActiveScene() != "Menu" ) {
+        if( !skipStateChange ) {
 
             GameManager.instance.ChangeGameState( GameManager.GameState.GameLoop );
         }
