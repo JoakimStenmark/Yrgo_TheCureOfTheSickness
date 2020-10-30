@@ -48,7 +48,7 @@ public class EnemyCluster : MonoBehaviour
     public void RandomizeSpawnAtLevel(int level)
     {
         spawnNumber = (int) Random.Range(-0.9f, 3);
-        //spawnNumber = 10;
+        spawnNumber = 0;
         //Enemy
         if(spawnNumber == 0)
         {
@@ -159,6 +159,4 @@ public class EnemyCluster : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-   
 }
