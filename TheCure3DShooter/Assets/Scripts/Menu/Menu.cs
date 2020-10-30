@@ -5,14 +5,6 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour {
 
-    void Start() {
-
-        if( GameManager.instance.currentGameState == GameManager.GameState.Menu ) {
-
-            
-        }
-    }
-
     public void StartGame() {
         
         GameManager.instance.ChangeGameState(GameManager.GameState.LoadLevel);
