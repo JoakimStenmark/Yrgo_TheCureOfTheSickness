@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: bloodCell
       value: 
       objectReference: {fileID: 2910454311137321216, guid: 87378f8191f01f74ab61983fa0b955ae, type: 3}
+    - target: {fileID: 1848526878703871996, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
+      propertyPath: skipStateChange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1848526878703871999, guid: a67e41fb0b238a14db6e8b00ac899a38, type: 3}
       propertyPath: m_Name
       value: LevelManager

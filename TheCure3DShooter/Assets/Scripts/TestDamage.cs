@@ -12,6 +12,7 @@ public class TestDamage : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().onHit(damage);
             SoundEffectPlaylist soundEffectPlaylist = GetComponent<SoundEffectPlaylist>();
+            Debug.Log("boop");
             if (soundEffectPlaylist != null)
             {
                 soundEffectPlaylist.PlayRandomFromClips();

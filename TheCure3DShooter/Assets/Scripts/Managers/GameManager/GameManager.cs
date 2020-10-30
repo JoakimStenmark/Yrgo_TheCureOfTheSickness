@@ -114,9 +114,7 @@ public class GameManager : MonoBehaviour {
 
         if( newGameState == GameState.GameLoop ) {
             music.GetComponent<AudioSource>().Play();
-            Debug.Log("game loop");
-
-
+            
         }
 
         if ( newGameState == GameState.PauseGame ) {
@@ -128,7 +126,7 @@ public class GameManager : MonoBehaviour {
 
             Cursor.visible = true;
             menuCanvas.gameObject.SetActive( true );
-            Debug.Log("gameOver");
+            
             music.GetComponent<AudioSource>().Stop();
             gameOverSound.GetComponent<AudioSource>().Play();
 
