@@ -6,8 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
-    public void StartGame() {
+    AudioSource audioSource;
 
+    void Start() {
+
+        audioSource = GetComponent<AudioSource>();
+
+        if( GameManager.instance.currentGameState == GameManager.GameState.Menu ) {
+
+            
+        }
+    }
+
+    public void StartGame() {
+        
         GameManager.instance.ChangeGameState(GameManager.GameState.LoadLevel);
         Debug.Log("loading scene");
     }
@@ -18,7 +30,7 @@ public class Menu : MonoBehaviour {
     }
 
     public void MainMenu() {
-
+  
         GameManager.instance.ChangeGameState( GameManager.GameState.Menu );
     }
 }

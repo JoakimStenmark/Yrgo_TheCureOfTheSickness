@@ -1,4 +1,6 @@
 ﻿//Robert S
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -46,7 +48,7 @@ public class EnemyCluster : MonoBehaviour
     public void RandomizeSpawnAtLevel(int level)
     {
         spawnNumber = (int) Random.Range(-0.9f, 3);
-        //spawnNumber = 0;
+        //spawnNumber = 10;
         //Enemy
         if(spawnNumber == 0)
         {

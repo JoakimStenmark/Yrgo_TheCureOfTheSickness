@@ -7,8 +7,6 @@ public class LevelManager : MonoBehaviour {
     
     public static LevelManager instance;
 
-    //List<GameObject> ObjectList = new List<GameObject>();
-
     GameObject player;
 
     [Header("Prefabs")]
