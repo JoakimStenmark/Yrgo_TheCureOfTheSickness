@@ -64,7 +64,7 @@ public class PlayerProjectile : MonoBehaviour
             //Test
             if (rayHit.collider.GetComponent<Rigidbody>())
             {
-                rayHit.collider.GetComponent<Rigidbody>().AddForce(transform.forward * 100, ForceMode.Impulse);
+                rayHit.collider.GetComponent<Rigidbody>().AddForce(transform.forward * 25, ForceMode.Impulse);
             }
             //TEST Slut
             //Debug.Log(rayHit.collider.gameObject);
