@@ -140,4 +140,9 @@ public class GameManager : MonoBehaviour {
 
         currentGameState = newGameState;
     }
+
+    public string GetActiveScene() {
+
+        return SceneManager.GetActiveScene().name;
+    }
 }

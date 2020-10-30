@@ -46,7 +46,10 @@ public class LevelManager : MonoBehaviour {
 
         GenerateLevel();
 
-        GameManager.instance.ChangeGameState( GameManager.GameState.GameLoop );
+        if( GameManager.instance.GetActiveScene() != "Menu" ) {
+
+            GameManager.instance.ChangeGameState( GameManager.GameState.GameLoop );
+        }
     }
 
     public void GenerateLevel() {
