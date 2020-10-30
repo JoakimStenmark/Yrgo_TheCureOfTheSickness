@@ -5,8 +5,10 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Propetys")]
+    public float killRange = 100;
     public int hp = 1;
     public int dmg = 1;
+    private Rigidbody rb;
     private GameObject player;
     private GameObject railAnchor;
     private Vector2[] patrolPath;
@@ -16,8 +18,8 @@ public class EnemyMovement : MonoBehaviour
     public GameObject fxOnDeath;
 
     [Header("Behavior")]
-    public float moveForwardAt = 2;
-    public float dropFrorwardAt = 5;
+    public float plSyncAtSec = 2;
+    public float dropPlSyncAtSec = 5;
     public float patrolSpeed = 3;
     private float moveSpeed = 10;
     public bool homing = true;
@@ -25,18 +27,19 @@ public class EnemyMovement : MonoBehaviour
     public float chaseSpeed = 10;
     public float chaseAccMul = 10;
 
-    public float aimTime = 2;
+    public float aimTimeOut = 2;
     private float homingAngularSpeed = 2;
 
     public Vector3 homingTargetOffsett = Vector3.forward * 5;
     public float killAt = 20;
 
-    private Transform visual;
+    private Transform visualObject;
 
     public void SpawnInit(int spawNumber, Vector2[] path, GameObject ranchor, GameObject pl)
     {
-        visual = transform.GetChild(0);
-        visual.parent = null;
+        rb = GetComponent<Rigidbody>();
+        visualObject = transform.GetChild(0);
+        visualObject.parent = null;
 
         moveSpeed = patrolSpeed;
         p = spawNumber;
@@ -45,35 +48,17 @@ public class EnemyMovement : MonoBehaviour
         player = pl;
 
         transform.position = new Vector3(patrolPath[p].x, patrolPath[p].y, transform.position.z);
-
         transform.forward = player.transform.position - transform.position;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        PlayerController hp = collision.collider.GetComponent<PlayerController>();
-        
-        if (hp != null)
-        {
-            hp.onHit(1);
-        }
-        KillMe();
-    }
+   
 
-    public void OnHit(int dmg)
-    {
-        hp--;
-        if(hp <= 0)
-            KillMe();
-    }
-    private void KillMe()
-    {
-        Instantiate(fxOnDeath, transform.position, transform.rotation);
-        Destroy(visual.gameObject);
-        Destroy(gameObject);
-    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        Visuals();
+    }
+    void FixedUpdate()
     {
         if (chase)
         {
@@ -85,13 +70,10 @@ public class EnemyMovement : MonoBehaviour
             Patrol();
         }
 
-        VisualObject();
+        //Visuals();
+        KillOnRange();
     }
 
-    void VisualObject()
-    {
-        visual.position = transform.position;
-    }
 
     void HomingOnPlayer()
     {
@@ -109,13 +91,14 @@ public class EnemyMovement : MonoBehaviour
                 KillMe();
             }
         }
-        
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-        aimTime -= Time.deltaTime;
+        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        //rb.MovePosition(transform.forward * moveSpeed);
+
+        aimTimeOut -= Time.deltaTime;
         Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
         //stop persuit
-        if (aimTime < 0)
+        if (aimTimeOut < 0)
         {
             if (Vector3.Dot(player.transform.forward, transform.forward) > 0)
             {
@@ -141,14 +124,15 @@ public class EnemyMovement : MonoBehaviour
             }
             Vector3 newPosition = new Vector3(newPos.x, newPos.y, transform.position.z);
             transform.forward = newPosition - transform.position;
-            transform.position = newPosition;// new Vector3(newPos.x, newPos.y, transform.position.z);
+            transform.position = newPosition;
+            //rb.MovePosition(transform.forward * moveSpeed * Time.fixedDeltaTime);
         }
     }
     void ForwardMovement()
     {
-        if (moveForwardAt < 0)
+        if (plSyncAtSec < 0)
         {
-            if (dropFrorwardAt > 0)
+            if (dropPlSyncAtSec > 0)
             {
                 transform.parent = railAnchor.transform;
             }
@@ -161,7 +145,48 @@ public class EnemyMovement : MonoBehaviour
                 transform.parent = null;
             }
         }
-        moveForwardAt -= Time.deltaTime;
-        dropFrorwardAt -= Time.deltaTime;
+        plSyncAtSec -= Time.deltaTime;
+        dropPlSyncAtSec -= Time.deltaTime;
+    }
+
+    void Visuals()
+    {
+        visualObject.position = transform.position;
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        PlayerController hp = collision.collider.GetComponent<PlayerController>();
+        if (hp != null)
+        {
+            hp.onHit(1);
+        }
+        KillMe();
+    }
+
+    public void OnHit(int dmg)
+    {
+        hp--;
+        if (hp <= 0)
+            KillMe();
+    }
+    private void KillMe()
+    {
+        Instantiate(fxOnDeath, transform.position, transform.rotation);
+        Destroy(visualObject.gameObject);
+        Destroy(gameObject);
+    }
+
+    void KillOnRange()
+    {
+        if (transform.position.z - player.transform.position.z < -killRange)
+            SilentKill();
+    }
+
+    private void SilentKill()
+    {
+        Destroy(visualObject.gameObject);
+        Destroy(gameObject);
     }
 }
