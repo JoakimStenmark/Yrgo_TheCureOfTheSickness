@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     public Canvas menuCanvas;
+    public GameObject music;
+    public GameObject gameOverSound;
 
     public enum GameState {
 
@@ -90,13 +92,18 @@ public class GameManager : MonoBehaviour {
 
             SceneManager.LoadScene( "Menu" );
             Cursor.visible = true;
+            music.GetComponent<AudioSource>().Stop();
+            gameOverSound.GetComponent<AudioSource>().Stop();
+
         }
 
-        if( newGameState == GameState.LoadLevel ) {
+        if ( newGameState == GameState.LoadLevel ) {
 
             Cursor.visible = false;
             SceneManager.LoadScene( "GameLevel" );
             menuCanvas.gameObject.SetActive( false );
+            gameOverSound.GetComponent<AudioSource>().Stop();
+
         }
 
         if ( newGameState == GameState.LevelLoaded ) {
@@ -105,6 +112,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if( newGameState == GameState.GameLoop ) {
+            music.GetComponent<AudioSource>().Play();
 
 
         }
@@ -118,11 +126,16 @@ public class GameManager : MonoBehaviour {
 
             Cursor.visible = true;
             menuCanvas.gameObject.SetActive( true );
+            music.GetComponent<AudioSource>().Stop();
+            gameOverSound.GetComponent<AudioSource>().Play();
+
         }
 
         if (newGameState == GameState.Victory) {
 
             SceneManager.LoadScene("WinnerLevel");
+            music.GetComponent<AudioSource>().Stop();
+
         }
 
         currentGameState = newGameState;

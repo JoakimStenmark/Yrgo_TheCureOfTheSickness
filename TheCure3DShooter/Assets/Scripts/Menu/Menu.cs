@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour {
     public void StartGame() {
 
         GameManager.instance.ChangeGameState(GameManager.GameState.LoadLevel);
+        Debug.Log("loading scene");
     }
 
     public void QuitGame() {
